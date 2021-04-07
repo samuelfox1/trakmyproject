@@ -6,7 +6,7 @@ Keep yourself and others up to date with what your building and how you're build
 
 <br>
 
-API development in progress [TrakMyProject-api]('https://github.com/samuelfox1/trakmyproject-api')
+API development in progress [TrakMyProject-api]("https://github.com/samuelfox1/trakmyproject-api")
 
 <br>
 
