@@ -1,29 +1,19 @@
+import React from 'react'
 import './App.css';
+import { SignUpForm } from './components/SignupForm/SignUpForm';
 
-function App() {
+
+export const App = () => {
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Welcome to TrakMyProject!</h1>
         <p>Keep others up to date with <span className="emphasize">what</span> your building and <span className="emphasize">how</span> you're building it.</p>
-        <br />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Circle-icons-roadblock.svg/600px-Circle-icons-roadblock.svg.png" className="App-logo" alt="under construction" />
-        <br />
-        <p>Site Under Construction</p>
-        <p>Follow along on <a
-          className="App-link"
-          href="https://github.com/samuelfox1/trakmyproject"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          github
-        </a>
-        </p>
-        <h6>A project by <a className="App-link" href="https://samueljfox.com" target="_blank" rel="noopener noreferrer"
-        >samueljfox.com</a></h6>
+        {/* <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Circle-icons-roadblock.svg/600px-Circle-icons-roadblock.svg.png" className="App-logo" alt="under construction" /> */}
       </header>
-    </div >
-  );
-}
+      <SignUpForm />
 
-export default App;
+    </div >
+  )
+}

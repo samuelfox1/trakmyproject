@@ -1,0 +1,23 @@
+.input-signup {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: .5rem;
+    padding: 1rem;
+    background-color: hsla(0, 0%, 67%, 0.178);
+    color: white;
+    border-radius: .5rem;
+}
+
+.input-signup-submit {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+    background-color: hsla(0, 0%, 67%, 0.178);
+    color: white;
+    border-radius: .5rem;
+    /* width: 3.5rem; */
+}
+
+label {
+    margin-right: 1rem;
+}
