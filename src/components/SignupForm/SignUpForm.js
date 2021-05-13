@@ -6,11 +6,26 @@ import { Password } from '../Form/Password'
 import { Submit } from '../Form/Submit'
 import { Text } from '../Form/Text'
 import './SignUpForm.css'
+import { checkAvailableUsername } from '../../utils/userAPI'
 
 export const SignUpForm = () => {
-    const [allowSubmit, setAllowSubmit] = useState(false)
+    const componentName = 'signUpForm'
+    const inputClassName = "input-signup"
+    const nameUsername = 'username'
+    const nameFirstName = 'firstName'
+    const nameLastName = 'lastName'
+    const nameEmail = 'email'
+    const namePassword = 'password'
+    const nameConfirmPassword = 'confirmPassword'
+    const minPasswordLength = 8
+
     const [validEmail, setValidEmail] = useState(false)
+    const [usernameClassName, setUsernameClassName] = useState('')
+    const [passwordClassName, setPasswordClassName] = useState('')
+    const [confirmPasswordClassName, setConfirmPasswordClassName] = useState('')
+    const [emailClassName, setEmailClassName] = useState('')
     const [validPassword, setValidPassword] = useState(false)
+    const [allowSubmit, setAllowSubmit] = useState(false)
     const [signUpInputs, setSignUpInputs] = useState({
         username: '',
         password: '',
@@ -20,15 +35,6 @@ export const SignUpForm = () => {
         email: ''
 
     })
-
-    const inputClassName = "input-signup"
-    const nameUsername = 'username'
-    const nameFirstName = 'firstName'
-    const nameLastName = 'lastName'
-    const nameEmail = 'email'
-    const namePassword = 'password'
-    const nameConfirmPassword = 'confirmPassword'
-    const minPasswordLength = 8
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -41,8 +47,26 @@ export const SignUpForm = () => {
     }
 
     useEffect(() => {
-        //axios request to see check available username
+        localStorage.setItem(componentName, 'ready')
+        return () => localStorage.removeItem(componentName)
+    }, [])
 
+    useEffect(() => {
+        const username = signUpInputs.username
+        if (!username) {
+            setUsernameClassName('')
+            return
+        }
+
+        checkAvailableUsername(username)
+            .then(response => {
+                if (!localStorage.getItem(componentName)) return
+                console.log(response)
+                response
+                    ? setUsernameClassName('valid')
+                    : setUsernameClassName('error')
+            })
+            .catch(err => console.log(err))
     }, [signUpInputs.username])
 
     //validate email
@@ -53,14 +77,25 @@ export const SignUpForm = () => {
         email.length >= 5
             && emailArr.indexOf('@') !== -1
             && emailArr.indexOf('.') !== -1
-            ? setValidEmail(true)
-            : setValidEmail(false)
+            ? setValidEmail(true) && setEmailClassName('valid')
+            : setValidEmail(false) && setEmailClassName('error')
     }, [signUpInputs.email])
 
     //validate password
     useEffect(() => {
-        signUpInputs.password === signUpInputs.confirmPassword
-            && signUpInputs.password.length >= minPasswordLength
+        const password = signUpInputs.password
+        const confirmed = signUpInputs.confirmPassword
+
+        password.length >= minPasswordLength
+            ? setPasswordClassName('valid')
+            : setPasswordClassName('error')
+
+        confirmed.length >= minPasswordLength
+            ? setConfirmPasswordClassName('valid')
+            : setConfirmPasswordClassName('error')
+
+
+        password === confirmed && password.length >= minPasswordLength
             ? setValidPassword(true)
             : setValidPassword(false)
     }, [signUpInputs.password, signUpInputs.confirmPassword])
@@ -71,6 +106,7 @@ export const SignUpForm = () => {
             let key
             for (key in signUpInputs) {
                 if (!signUpInputs[key]) return false
+                signUpInputs[key] = signUpInputs[key].trim()
             }
             return true
         }
@@ -91,21 +127,21 @@ export const SignUpForm = () => {
                     <Label htmlFor={nameLastName} text='Last Name:' />
                     <Text htmlName={nameLastName} value={signUpInputs.lastName} handleInputChange={handleInputChange} />
                 </Flex>
-                <Flex className={inputClassName}>
+                <Flex className={`${inputClassName} ${emailClassName}`}>
                     <Label htmlFor={nameEmail} text='Email:' />
-                    <Text htmlName={nameEmail} value={signUpInputs.email} handleInputChange={handleInputChange} />
+                    <Text htmlName={nameEmail} value={signUpInputs.email.trim()} handleInputChange={handleInputChange} />
                 </Flex>
-                <Flex className={inputClassName}>
+                <Flex className={`${inputClassName} ${usernameClassName}`}>
                     <Label htmlFor={nameUsername} text='Username:' />
                     <Text htmlName={nameUsername} value={signUpInputs.username} handleInputChange={handleInputChange} />
                 </Flex>
-                <Flex className={inputClassName}>
+                <Flex className={`${inputClassName} ${passwordClassName}`}>
                     <Label htmlFor={namePassword} text='Password:' />
-                    <Password htmlName={namePassword} value={signUpInputs.password} handleInputChange={handleInputChange} />
+                    <Password htmlName={namePassword} value={signUpInputs.password.trim()} handleInputChange={handleInputChange} />
                 </Flex>
-                <Flex className={inputClassName}>
+                <Flex className={`${inputClassName} ${confirmPasswordClassName}`}>
                     <Label htmlFor={nameConfirmPassword} text='Confrim PW:' />
-                    <Password htmlName={nameConfirmPassword} value={signUpInputs.confirmPassword} handleInputChange={handleInputChange} />
+                    <Password htmlName={nameConfirmPassword} value={signUpInputs.confirmPassword.trim()} handleInputChange={handleInputChange} />
                 </Flex>
 
                 {allowSubmit
