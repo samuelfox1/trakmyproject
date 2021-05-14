@@ -6,9 +6,9 @@ import { Password } from '../Form/Password'
 import { Submit } from '../Form/Submit'
 import { Text } from '../Form/Text'
 import './SignUpForm.css'
-import { checkAvailableUsername } from '../../utils/userAPI'
+import { checkAvailableEmail, checkAvailableUsername, createUser } from '../../utils/userAPI'
 
-export const SignUpForm = () => {
+export const SignUpForm = ({ loggedInUser, setLoggedInUser }) => {
     const componentName = 'signUpForm'
     const inputClassName = "input-signup"
     const nameUsername = 'username'
@@ -33,8 +33,12 @@ export const SignUpForm = () => {
         firstName: '',
         lastName: '',
         email: ''
-
     })
+
+    useEffect(() => {
+        localStorage.setItem(componentName, 'ready')
+        return () => localStorage.removeItem(componentName)
+    }, [])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -43,13 +47,17 @@ export const SignUpForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(signUpInputs)
-    }
+        createUser(signUpInputs)
+            .then(newUser => {
+                if (!localStorage.getItem(componentName)) return
+                if (!newUser) console.log('failed to create new user')
+                setLoggedInUser(newUser.user)
+                localStorage.setItem('token', newUser.token)
+                window.location.href = '/'
 
-    useEffect(() => {
-        localStorage.setItem(componentName, 'ready')
-        return () => localStorage.removeItem(componentName)
-    }, [])
+            })
+            .catch(err => console.log(err))
+    }
 
     useEffect(() => {
         const username = signUpInputs.username
@@ -74,11 +82,25 @@ export const SignUpForm = () => {
         const email = signUpInputs.email
         const emailArr = email.split('')
 
-        email.length >= 5
+        if (email.length >= 5
             && emailArr.indexOf('@') !== -1
-            && emailArr.indexOf('.') !== -1
-            ? setValidEmail(true) && setEmailClassName('valid')
-            : setValidEmail(false) && setEmailClassName('error')
+            && emailArr.indexOf('.') !== -1) {
+            checkAvailableEmail(email)
+                .then(newEmail => {
+                    if (!localStorage.getItem(componentName)) return
+                    if (!newEmail) {
+                        setValidEmail(false)
+                        setEmailClassName('error')
+                        return
+                    }
+                    setValidEmail(true)
+                    setEmailClassName('')
+                })
+                .catch(err => console.log(err))
+        }
+        // ? setValidEmail(true) && setEmailClassName('valid')
+        // : setValidEmail(false) && setEmailClassName('error')
+
     }, [signUpInputs.email])
 
     //validate password
@@ -90,14 +112,14 @@ export const SignUpForm = () => {
             ? setPasswordClassName('valid')
             : setPasswordClassName('error')
 
-        confirmed.length >= minPasswordLength
-            ? setConfirmPasswordClassName('valid')
-            : setConfirmPasswordClassName('error')
+        if (password === confirmed && password.length >= minPasswordLength) {
+            setValidPassword(true)
+            setConfirmPasswordClassName('valid')
+        } else {
+            setValidPassword(false)
+            setConfirmPasswordClassName('error')
+        }
 
-
-        password === confirmed && password.length >= minPasswordLength
-            ? setValidPassword(true)
-            : setValidPassword(false)
     }, [signUpInputs.password, signUpInputs.confirmPassword])
 
     //validateForm
