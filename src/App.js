@@ -1,29 +1,33 @@
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
+import Landing from "./pages/Landing";
+import Home from './pages/Home'
+import SignUp from "./pages/SignUp";
 
-function App() {
+
+export default function App() {
+  const [loggedInUser, setLoggedInUser] = useState({ loggedIn: false })
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to TrakMyProject!</h1>
-        <p>Keep others up to date with <span className="emphasize">what</span> your building and <span className="emphasize">how</span> you're building it.</p>
-        <br />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Circle-icons-roadblock.svg/600px-Circle-icons-roadblock.svg.png" className="App-logo" alt="under construction" />
-        <br />
-        <p>Site Under Construction</p>
-        <p>Follow along on <a
-          className="App-link"
-          href="https://github.com/samuelfox1/trakmyproject"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          github
-        </a>
-        </p>
-        <h6>A project by <a className="App-link" href="https://samueljfox.com" target="_blank" rel="noopener noreferrer"
-        >samueljfox.com</a></h6>
-      </header>
-    </div >
-  );
-}
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path='/'>
+            <Landing />
+          </Route>
 
-export default App;
+          <Route exact path='/signup'>
+            <SignUp loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
+          </Route>
+
+          <Route exact path='/user/:username'>
+            <Home />
+          </Route>
+
+        </Switch>
+      </div >
+    </Router >
+  )
+}
