@@ -1,11 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useParams, useHistory } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link, useParams, useHistory } from 'react-router-dom'
+import { UserContext } from '../UserContext'
 
 export default function Home() {
     const { username } = useParams()
     const history = useHistory()
-    // console.log(history)
+    const { loggedInUser } = useContext(UserContext)
 
     const handleBack = () => {
         history.goBack()
@@ -16,6 +16,7 @@ export default function Home() {
             <h1>{username}</h1>
             <Link to='/'>Logout</Link>
             <button onClick={handleBack} >Back</button>
+            <div>{JSON.stringify(loggedInUser)}</div>
 
         </>
     )

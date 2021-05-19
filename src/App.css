@@ -7,6 +7,16 @@
   justify-content: flex-start;
 }
 
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom:1rem;
+  width: 90vw;
+  border-bottom: solid white 1px;
+  color: white;
+}
+
 h1 {
   margin: 0 0;
 }
