@@ -57,6 +57,16 @@ export const loginUser = ({ username, password }) => {
     )
 }
 
+export const checkToken = token => {
+    const URL = `${API_PREFIX}/api/user`
+
+    return (
+        axios.get(URL, { headers: { authorization: `Bearer: ${token}` } })
+            .then((data) => data)
+            .catch(err => err)
+    )
+}
+
 export const logoutUser = () => {
 
 }

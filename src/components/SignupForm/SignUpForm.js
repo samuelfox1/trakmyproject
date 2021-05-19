@@ -53,7 +53,7 @@ export const SignUpForm = () => {
                 if (!localStorage.getItem(componentName)) return
                 if (!newUser) console.log('failed to create new user')
                 setLoggedInUser(newUser.user)
-                localStorage.setItem('token', newUser.token)
+                localStorage.setItem('tmpToken', newUser.token)
                 // window.location.href = '/'
 
             })

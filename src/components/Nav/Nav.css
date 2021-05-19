@@ -8,7 +8,6 @@ nav {
     color: white;
     background-color: rgba(0, 0, 0, 0.452);
     border-bottom: solid white 1px;
-    overflow-x: hidden
 }
 
 .nav-login-container {
@@ -21,8 +20,12 @@ nav {
     color:rgb(179, 49, 49)
 }
 
-.nav-login-inputs {
+.nav-login-input-container {
     justify-content: space-between;
+}
+
+.nav-login-submit {
+    margin: 0 1rem;
 }
 
 .nav-brand-link {
