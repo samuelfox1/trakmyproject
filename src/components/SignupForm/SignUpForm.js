@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { Form } from '../Form/Form'
-import { Flex } from '../Flex/Flex'
-import { Label } from '../Form/Label'
-import { Password } from '../Form/Password'
-import { Submit } from '../Form/Submit'
-import { Text } from '../Form/Text'
-import './SignUpForm.css'
+import React, { useState, useEffect, useContext } from 'react'
 import { checkAvailableEmail, checkAvailableUsername, createUser } from '../../utils/userAPI'
+import { UserContext } from '../../UserContext'
+import './SignUpForm.css'
+import { Form, Label, Password, Submit, Text } from '../Elements/FormElements'
+import { Flex } from '../Flex/Flex'
 
-export const SignUpForm = ({ loggedInUser, setLoggedInUser }) => {
+
+export const SignUpForm = () => {
+    const { setLoggedInUser } = useContext(UserContext)
+
     const componentName = 'signUpForm'
     const inputClassName = "input-signup"
     const nameUsername = 'username'
@@ -34,6 +34,8 @@ export const SignUpForm = ({ loggedInUser, setLoggedInUser }) => {
         lastName: '',
         email: ''
     })
+
+
 
     useEffect(() => {
         localStorage.setItem(componentName, 'ready')

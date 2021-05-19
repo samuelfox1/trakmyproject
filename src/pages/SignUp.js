@@ -6,7 +6,6 @@ export default function SignUp() {
     const username = 'samfox1'
     const history = useHistory()
     const { pathname } = history.location
-    // console.log(history)
 
     const handleBack = () => {
         history.goBack()
@@ -15,7 +14,6 @@ export default function SignUp() {
     return (
         <>
             <SignUpForm />
-            <Link to={{ pathname: `/user/${username}`, state: { from: pathname } }}>Home</Link>
             <button onClick={handleBack} >Back</button>
         </>
     )

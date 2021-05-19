@@ -21,7 +21,7 @@ export const checkAvailableUsername = (username) => {
 
     return (
         axios.post(URL, data)
-            .then(data => data.data)
+            .then(({ data }) => data)
             .catch(err => err)
     )
 }
@@ -41,7 +41,22 @@ export const createUser = (user) => {
 
     return (
         axios.post(URL, formatted)
-            .then(data => data.data)
+            .then(({ data }) => data)
             .catch(err => err)
     )
+}
+
+export const loginUser = ({ username, password }) => {
+    const URL = `${API_PREFIX}/api/login`
+    const data = { username: username, password: password }
+
+    return (
+        axios.post(URL, data)
+            .then(data => data)
+            .catch(err => err)
+    )
+}
+
+export const logoutUser = () => {
+
 }
