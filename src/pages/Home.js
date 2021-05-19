@@ -13,11 +13,10 @@ export default function Home() {
 
     return (
         <>
-            <h1>{username}</h1>
+            <h1>{loggedInUser.username}</h1>
             <Link to='/'>Logout</Link>
             <button onClick={handleBack} >Back</button>
-            <div>{JSON.stringify(loggedInUser)}</div>
-
+            <div className='stringify' >{JSON.stringify(loggedInUser)}</div>
         </>
     )
 }

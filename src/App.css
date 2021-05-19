@@ -17,6 +17,12 @@ nav {
   color: white;
 }
 
+.stringify{
+  display: block;
+  width:50vw;
+  color:white
+}
+
 h1 {
   margin: 0 0;
 }
