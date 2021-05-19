@@ -1,24 +1,46 @@
-export const Button = ({ className, text, action, history }) => (
+
+export const Button = ({ className, onClick, children }) => (
     <button
         type="button"
         className={className}
-        onClick={action}
+        onClick={onClick}
     >
-        {text}
+        {children}
     </button>
 )
 
 export const Image = ({ src, className, alt }) => (
-    <img src={src} className={className} alt={alt} />
+    < img src={src} className={className} alt={alt} />
 )
 
-export const P = ({ className, text }) => (
-    <p className={className}>{text}</p>
+export const P = ({ className, children }) => (
+    <p className={className}>{children}</p>
 )
 
-export const Span = ({ className, text }) => (
-    <span className={className}>{text}</span>
+export const Span = ({ className, children }) => (
+    <span className={className}>{children}</span>
 )
-export const H1 = ({ className, text }) => (
-    <h1 className={className}>{text}</h1>
+
+export const H1 = ({ className, children }) => (
+    <h1 className={className}>{children}</h1>
+)
+
+export const H2 = ({ className, children }) => (
+    <h2 className={className}>{children}</h2>
+)
+
+export const H3 = ({ className, children }) => (
+    <h3 className={className}>{children}</h3>
+)
+
+export const H4 = ({ className, children }) => (
+    <h4 className={className}>{children}</h4>
+)
+
+export const H5 = ({ className, children }) => (
+    <h5 className={className}>{children}</h5>
+)
+
+export const H6 = ({ className, children }) => (
+    <h6 className={className}>{children}</h6>
 )

@@ -1,3 +1,34 @@
-.nav-login {
+nav {
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin: 0 0 0 0;
+    padding:1rem;
+    width: 98vw;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.452);
+    border-bottom: solid white 1px;
+    overflow-x: hidden
+}
+
+.nav-login-container {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.login-error-message {
+    margin: 0 0;
+    color:rgb(179, 49, 49)
+}
+
+.nav-login-inputs {
+    justify-content: space-between;
+}
+
+.nav-brand-link {
+   color: rgb(255, 255, 255)
+}
+.nav-brand-link:hover {
+    font-size: 1.05rem;
+   color: red
 }

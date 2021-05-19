@@ -1,22 +1,13 @@
-import React, { useContext } from 'react'
-import { Link, useParams, useHistory } from 'react-router-dom'
-import { UserContext } from '../UserContext'
+import React from 'react'
+import UserInfo from '../components/UserInfo/UserInfo'
+import UserProjects from '../components/UserProjects/UserProjects'
 
 export default function Home() {
-    const { username } = useParams()
-    const history = useHistory()
-    const { loggedInUser } = useContext(UserContext)
-
-    const handleBack = () => {
-        history.goBack()
-    }
 
     return (
         <>
-            <h1>{loggedInUser.username}</h1>
-            <Link to='/'>Logout</Link>
-            <button onClick={handleBack} >Back</button>
-            <div className='stringify' >{JSON.stringify(loggedInUser)}</div>
+            <UserInfo />
+            <UserProjects />
         </>
     )
 }

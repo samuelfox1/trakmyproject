@@ -1,39 +1,9 @@
 .App {
-  padding: 1rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom:1rem;
-  width: 90vw;
-  border-bottom: solid white 1px;
-  color: white;
-}
-
-.stringify{
-  display: block;
-  width:50vw;
-  color:white
-}
-
-h1 {
-  margin: 0 0;
-}
-
-.login-container{
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: .5rem;
 }
 
 .App-logo {
@@ -56,14 +26,9 @@ h1 {
   color: #61dafb;
 }
 
-
 .emphasize{
   font-size: 2rem;
   color: orange;
-}
-
-h6 {
-  margin: 4rem 0 1rem 0;
 }
 
 @keyframes App-logo-spin {

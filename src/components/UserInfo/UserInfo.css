@@ -1,0 +1,12 @@
+.user-container {
+    margin-top: 1rem;
+    padding:1rem;
+    flex-wrap: wrap;
+    background-color: rgb(156, 156, 156);
+}
+
+.user-info {
+    padding: 0 5rem;
+    justify-content: center;
+    flex-direction: column;
+}

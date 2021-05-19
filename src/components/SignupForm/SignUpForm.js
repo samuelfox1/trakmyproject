@@ -11,12 +11,12 @@ export const SignUpForm = () => {
 
     const componentName = 'signUpForm'
     const inputClassName = "input-signup"
-    const nameUsername = 'username'
-    const nameFirstName = 'firstName'
-    const nameLastName = 'lastName'
-    const nameEmail = 'email'
-    const namePassword = 'password'
-    const nameConfirmPassword = 'confirmPassword'
+    const htmlNameUsername = 'username'
+    const htmlNameFirstName = 'firstName'
+    const htmlNameLastName = 'lastName'
+    const htmlNameEmail = 'email'
+    const htmlNamePassword = 'password'
+    const htmlNameConfirmPassword = 'confirmPassword'
     const minPasswordLength = 8
 
     const [validEmail, setValidEmail] = useState(false)
@@ -34,8 +34,7 @@ export const SignUpForm = () => {
         lastName: '',
         email: ''
     })
-
-
+    const { username, password, confirmPassword, firstName, lastName, email } = signUpInputs
 
     useEffect(() => {
         localStorage.setItem(componentName, 'ready')
@@ -55,18 +54,14 @@ export const SignUpForm = () => {
                 if (!newUser) console.log('failed to create new user')
                 setLoggedInUser(newUser.user)
                 localStorage.setItem('token', newUser.token)
-                window.location.href = '/'
+                // window.location.href = '/'
 
             })
             .catch(err => console.log(err))
     }
 
     useEffect(() => {
-        const username = signUpInputs.username
-        if (!username) {
-            setUsernameClassName('')
-            return
-        }
+        if (!username) return setUsernameClassName('')
 
         checkAvailableUsername(username)
             .then(response => {
@@ -77,11 +72,10 @@ export const SignUpForm = () => {
                     : setUsernameClassName('error')
             })
             .catch(err => console.log(err))
-    }, [signUpInputs.username])
+    }, [username])
 
     //validate email
     useEffect(() => {
-        const email = signUpInputs.email
         const emailArr = email.split('')
 
         if (email.length >= 5
@@ -103,18 +97,16 @@ export const SignUpForm = () => {
         // ? setValidEmail(true) && setEmailClassName('valid')
         // : setValidEmail(false) && setEmailClassName('error')
 
-    }, [signUpInputs.email])
+    }, [email])
 
     //validate password
     useEffect(() => {
-        const password = signUpInputs.password
-        const confirmed = signUpInputs.confirmPassword
 
         password.length >= minPasswordLength
             ? setPasswordClassName('valid')
             : setPasswordClassName('error')
 
-        if (password === confirmed && password.length >= minPasswordLength) {
+        if (password === confirmPassword && password.length >= minPasswordLength) {
             setValidPassword(true)
             setConfirmPasswordClassName('valid')
         } else {
@@ -122,7 +114,7 @@ export const SignUpForm = () => {
             setConfirmPasswordClassName('error')
         }
 
-    }, [signUpInputs.password, signUpInputs.confirmPassword])
+    }, [password, confirmPassword])
 
     //validateForm
     useEffect(() => {
@@ -141,31 +133,31 @@ export const SignUpForm = () => {
     }, [signUpInputs, validEmail, validPassword])
 
     return (
-        <Flex className="login-container">
+        <Flex className="signup-container">
             <Form  >
                 <Flex className={inputClassName}>
-                    <Label htmlFor={nameFirstName} text='First Name:' />
-                    <Text htmlName={nameFirstName} value={signUpInputs.firstName} handleInputChange={handleInputChange} />
+                    <Label htmlFor={htmlNameFirstName} text='First Name:' />
+                    <Text htmlName={htmlNameFirstName} value={firstName} handleInputChange={handleInputChange} />
                 </Flex>
                 <Flex className={inputClassName}>
-                    <Label htmlFor={nameLastName} text='Last Name:' />
-                    <Text htmlName={nameLastName} value={signUpInputs.lastName} handleInputChange={handleInputChange} />
+                    <Label htmlFor={htmlNameLastName} text='Last Name:' />
+                    <Text htmlName={htmlNameLastName} value={lastName} handleInputChange={handleInputChange} />
                 </Flex>
                 <Flex className={`${inputClassName} ${emailClassName}`}>
-                    <Label htmlFor={nameEmail} text='Email:' />
-                    <Text htmlName={nameEmail} value={signUpInputs.email.trim()} handleInputChange={handleInputChange} />
+                    <Label htmlFor={htmlNameEmail} text='Email:' />
+                    <Text htmlName={htmlNameEmail} value={email.trim()} handleInputChange={handleInputChange} />
                 </Flex>
                 <Flex className={`${inputClassName} ${usernameClassName}`}>
-                    <Label htmlFor={nameUsername} text='Username:' />
-                    <Text htmlName={nameUsername} value={signUpInputs.username} handleInputChange={handleInputChange} />
+                    <Label htmlFor={htmlNameUsername} text='Username:' />
+                    <Text htmlName={htmlNameUsername} value={username} handleInputChange={handleInputChange} />
                 </Flex>
                 <Flex className={`${inputClassName} ${passwordClassName}`}>
-                    <Label htmlFor={namePassword} text='Password:' />
-                    <Password htmlName={namePassword} value={signUpInputs.password.trim()} handleInputChange={handleInputChange} />
+                    <Label htmlFor={htmlNamePassword} text='Password:' />
+                    <Password htmlName={htmlNamePassword} value={password.trim()} handleInputChange={handleInputChange} />
                 </Flex>
                 <Flex className={`${inputClassName} ${confirmPasswordClassName}`}>
-                    <Label htmlFor={nameConfirmPassword} text='Confrim PW:' />
-                    <Password htmlName={nameConfirmPassword} value={signUpInputs.confirmPassword.trim()} handleInputChange={handleInputChange} />
+                    <Label htmlFor={htmlNameConfirmPassword} text='Confrim PW:' />
+                    <Password htmlName={htmlNameConfirmPassword} value={confirmPassword.trim()} handleInputChange={handleInputChange} />
                 </Flex>
 
                 {allowSubmit

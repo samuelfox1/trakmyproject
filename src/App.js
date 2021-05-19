@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import './App.css';
-import Landing from "./pages/Landing";
-import Home from './pages/Home'
-import SignUp from "./pages/SignUp";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import { UserContext } from "./UserContext";
+import { Flex } from "./components/Flex/Flex";
 import Nav from "./components/Nav/Nav";
+import Landing from "./pages/Landing";
+import SignUp from "./pages/SignUp";
+import Home from './pages/Home'
+import './App.css';
 
 
 function App() {
@@ -14,23 +15,27 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
-          <Nav />
+      <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
+
+        <Nav />
+        <Flex className='App'>
+
           <Route exact path='/'>
-            <Landing />
+            {loggedInUser.loggedIn ? <Redirect to={`/user/${loggedInUser.username}`} /> : <Landing />}
           </Route>
 
           <Route exact path='/signup'>
+            {/* {loggedInUser.loggedIn ? <Redirect to={`/user/${loggedInUser.username}`} /> : <SignUp />} */}
             <SignUp />
           </Route>
 
           <Route exact path='/user/:username'>
-            <Home />
+            {!loggedInUser.loggedIn ? <Redirect to='/' /> : <Home />}
           </Route>
 
-        </UserContext.Provider>
-      </div >
+        </Flex>
+
+      </UserContext.Provider>
     </Router >
   )
 }
