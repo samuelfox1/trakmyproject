@@ -68,9 +68,9 @@ export default function Nav() {
                                     handleInputChange={handleInputChange}
                                 />
                                 <Submit handleSubmit={handleLogin}>login</Submit>
+                                <button onClick={handleSignup}>signup</button>
                             </Form>
                         </Flex>
-                        <button onClick={handleSignup}>signup</button>
                     </>
                 }
 
