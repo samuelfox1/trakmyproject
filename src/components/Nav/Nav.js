@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../../UserContext'
 import { checkToken, loginUser } from '../../utils/userAPI'
-import { Button, H4 } from '../Elements/Elements'
+import { Button, H2, H4 } from '../Elements/Elements'
 import { Form, Password, Submit, Text } from '../Elements/FormElements'
 import { Flex } from '../Flex/Flex'
 import './Nav.css'
@@ -10,6 +10,7 @@ import './Nav.css'
 
 export default function Nav() {
     const [loginInputs, setLoginInputs] = useState({ username: 'sam0', password: 'password' })
+    const { username, password } = loginInputs
     const [loginErrorMessage, setLoginErrorMessage] = useState('')
     const { loggedInUser, setLoggedInUser } = useContext(UserContext)
     const { loggedIn } = loggedInUser
@@ -23,8 +24,8 @@ export default function Nav() {
     }
     const handleinputClick = (e) => {
         const { name } = e.target
-        if (name === loginInputs.username) setLoginInputs({ ...loginInputs, username: '' })
-        if (name === loginInputs.password) setLoginInputs({ ...loginInputs, password: '' })
+        if (name === username) setLoginInputs({ ...loginInputs, username: '' })
+        if (name === password) setLoginInputs({ ...loginInputs, password: '' })
     }
 
     const handleSignup = (e) => {
@@ -55,7 +56,6 @@ export default function Nav() {
         setLoginInputs({ username: 'username', password: 'password' })
         setLoadingStatus(false)
         history.push(`/user/${user.username}`)
-
     }, [history, setLoggedInUser])
 
     const isTokenExpired = useCallback(() => {
@@ -76,14 +76,16 @@ export default function Nav() {
         history.push('/')
     }
 
-
     return (
         <nav>
             <Link className='nav-brand-link' to='/'>TrackMyProject</Link>
-            <Flex className='nav-button-bin'>
+            <Flex >
                 {loggedIn
                     ? <>
-                        <Button onClick={handleLogout}>logout</Button>
+                        <Flex className='nav-logout-container' >
+                            <H2 className='nav-username'>{loggedInUser.username}</H2>
+                            <Button onClick={handleLogout}>logout</Button>
+                        </Flex>
                     </>
                     : <>
                         <Flex className='nav-login-container'>
@@ -91,13 +93,13 @@ export default function Nav() {
                                 <Form>
                                     <Text
                                         htmlName='username'
-                                        value={loginInputs.username}
+                                        value={username}
                                         handleInputClick={handleinputClick}
                                         handleInputChange={handleInputChange}
                                     />
                                     <Password
                                         htmlName='password'
-                                        value={loginInputs.password.trim()}
+                                        value={password.trim()}
                                         handleInputClick={handleinputClick}
                                         handleInputChange={handleInputChange}
                                     />

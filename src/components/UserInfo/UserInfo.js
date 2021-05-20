@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../../UserContext'
-import { H1, H5, Image } from '../Elements/Elements'
+import { H5, Image } from '../Elements/Elements'
 import { Flex } from '../Flex/Flex'
 import './UserInfo.css'
 
@@ -12,12 +12,9 @@ export default function UserInfo() {
     console.log(loggedInUser)
     return (
         <>
-            <Flex className='user-container'>
-                <Image src={profilePic} alt='profile' />
-                <Flex className='user-info'>
-                    <H1>Welcome, {loggedInUser.username}</H1>
-                    <H5>user since: {new Date(dateCreated).getFullYear()}</H5>
-                </Flex>
+            <Flex className='user-info-container'>
+                <Image className='profile-pic' src={profilePic} alt='profile' />
+                <H5>user since: {new Date(dateCreated).getFullYear()}</H5>
             </Flex>
         </>
     )

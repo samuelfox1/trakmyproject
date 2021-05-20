@@ -7,6 +7,7 @@ import Landing from "./pages/Landing";
 import SignUp from "./pages/SignUp";
 import Home from './pages/Home'
 import './App.css';
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           </Route>
 
         </Flex>
+        <Footer />
 
       </UserContext.Provider>
     </Router >

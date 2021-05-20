@@ -1,18 +1,39 @@
 nav {
+    height:2rem;
+    width: 100vw;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 0 0;
-    padding:1rem;
-    width: 98vw;
+
+    position: fixed;
+    top: 0; 
+    overflow: hidden;
+
+    padding:1rem 0;
+    
     color: white;
-    background-color: rgba(0, 0, 0, 0.452);
-    border-bottom: solid white 1px;
+    background-color: rgb(0, 0, 0);
+    /* border-bottom: solid white 3px; */
+    /* border: solid white 5px; */
 }
 
 .nav-login-container {
     flex-direction: column;
     align-items: flex-start;
+}
+
+.nav-logout-container {
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nav-username {
+    margin:0 0
+}
+
+.logout-button {
+    margin: 0 1rem
 }
 
 .login-error-message {
