@@ -41,7 +41,7 @@ export const createUser = (user) => {
 
     return (
         axios.post(URL, formatted)
-            .then(({ data }) => data)
+            .then(data => data)
             .catch(err => err)
     )
 }
@@ -62,7 +62,7 @@ export const checkToken = token => {
 
     return (
         axios.get(URL, { headers: { authorization: `Bearer: ${token}` } })
-            .then((data) => data)
+            .then(data => data)
             .catch(err => err)
     )
 }

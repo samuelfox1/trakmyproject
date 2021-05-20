@@ -22,16 +22,27 @@ function App() {
         <Flex className='App'>
 
           <Route exact path='/'>
-            {loggedInUser.loggedIn ? <Redirect to={`/user/${loggedInUser.username}`} /> : <Landing />}
+            {
+              loggedInUser.loggedIn
+                ? <Redirect to={`/user/${loggedInUser.username}`} />
+                : <Landing />
+            }
           </Route>
 
           <Route exact path='/signup'>
-            {/* {loggedInUser.loggedIn ? <Redirect to={`/user/${loggedInUser.username}`} /> : <SignUp />} */}
-            <SignUp />
+            {
+              loggedInUser.loggedIn
+                ? <Redirect to={`/user/${loggedInUser.username}`} />
+                : <SignUp />
+            }
           </Route>
 
           <Route exact path='/user/:username'>
-            {!loggedInUser.loggedIn ? <Redirect to='/' /> : <Home />}
+            {
+              !loggedInUser.loggedIn
+                ? <Redirect to='/' />
+                : <Home />
+            }
           </Route>
 
         </Flex>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../../UserContext'
 import { checkToken, loginUser } from '../../utils/userAPI'
-import { Button, H2, H6 } from '../Elements/Elements'
+import { Button, H3, H6 } from '../Elements/Elements'
 import { Form, Password, Submit, Text } from '../Elements/FormElements'
 import { Flex } from '../Flex/Flex'
 import './Nav.css'
@@ -82,14 +82,13 @@ export default function Nav() {
 
     return (
         <nav>
-            <Link className='nav-brand-link' to='/'>TrackMyProject</Link>
             {loggedIn
-                ? <>
-                    <Flex className='nav-logout-container' >
-                        <H2 className='nav-login-item'>{loggedInUser.username}</H2>
-                        <Button className='nav-login-item' onClick={handleLogout}>logout</Button>
-                    </Flex>
-                </>
+                ? <H3 className='nav-username'>hello, {loggedInUser.username}</H3>
+                : <Link className='nav-brand-link' to='/'>Welcome</Link>
+            }
+
+            {loggedIn
+                ? <Button className='nav-login-item' onClick={handleLogout}>logout</Button>
                 : <>
                     <Flex className='nav-login-container'>
                         <H6 className='login-error-message'>{loginErrorMessage}</H6>

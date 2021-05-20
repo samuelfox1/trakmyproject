@@ -28,13 +28,13 @@ nav {
     margin-right: 1rem ;
 }
 
+.nav-username {
+    margin-left: 1rem ;
+}
+
 .nav-logout-container {
     align-items: center;
     justify-content: space-around;
-}
-
-.nav-username {
-    margin:0 0
 }
 
 .logout-button {
@@ -46,13 +46,16 @@ nav {
     color:rgb(179, 49, 49)
 }
 
-.nav-brand-link {
-    margin:0 1rem;
-    color: rgb(255, 255, 255)
-}
 .nav-brand-link:hover {
     font-size: 1.05rem;
     color: red
+}
+
+a:-webkit-any-link.nav-brand-link {
+    margin:0 1rem;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    text-decoration: none;
 }
 
 

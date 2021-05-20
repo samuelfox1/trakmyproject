@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { useHistory } from 'react-router'
 import { checkAvailableEmail, checkAvailableUsername, createUser } from '../../utils/userAPI'
 import { UserContext } from '../../UserContext'
-import './SignUpForm.css'
 import { Form, Label, Password, Submit, Text } from '../Elements/FormElements'
 import { Flex } from '../Flex/Flex'
+import './SignUpForm.css'
+import { H2 } from '../Elements/Elements'
 
 
 export const SignUpForm = () => {
@@ -19,22 +21,23 @@ export const SignUpForm = () => {
     const htmlNameConfirmPassword = 'confirmPassword'
     const minPasswordLength = 8
 
-    const [validEmail, setValidEmail] = useState(false)
+    const [confirmPasswordClassName, setConfirmPasswordClassName] = useState('')
     const [usernameClassName, setUsernameClassName] = useState('')
     const [passwordClassName, setPasswordClassName] = useState('')
-    const [confirmPasswordClassName, setConfirmPasswordClassName] = useState('')
     const [emailClassName, setEmailClassName] = useState('')
     const [validPassword, setValidPassword] = useState(false)
     const [allowSubmit, setAllowSubmit] = useState(false)
+    const [validEmail, setValidEmail] = useState(false)
     const [signUpInputs, setSignUpInputs] = useState({
         username: '',
-        password: '',
-        confirmPassword: '',
+        password: 'password',
+        confirmPassword: 'password',
         firstName: '',
         lastName: '',
         email: ''
     })
     const { username, password, confirmPassword, firstName, lastName, email } = signUpInputs
+    const history = useHistory()
 
     useEffect(() => {
         localStorage.setItem(componentName, 'ready')
@@ -49,13 +52,13 @@ export const SignUpForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         createUser(signUpInputs)
-            .then(newUser => {
+            .then(({ data }) => {
+                const { user, token } = data
                 if (!localStorage.getItem(componentName)) return
-                if (!newUser) console.log('failed to create new user')
-                setLoggedInUser(newUser.user)
-                localStorage.setItem('tmpToken', newUser.token)
-                // window.location.href = '/'
-
+                if (!user) console.log('failed to create new user')
+                setLoggedInUser({ ...user, loggedIn: true })
+                localStorage.setItem('tmpToken', token)
+                history.push(`/user/${user.username}`)
             })
             .catch(err => console.log(err))
     }
@@ -134,6 +137,7 @@ export const SignUpForm = () => {
 
     return (
         <Flex className="signup-container">
+            <H2>Create an sccount</H2>
             <Form  >
                 <Flex className={inputClassName}>
                     <Label htmlFor={htmlNameFirstName} text='First Name:' />

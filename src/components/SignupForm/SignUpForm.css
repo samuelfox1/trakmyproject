@@ -1,10 +1,17 @@
 .signup-container{
-    padding: 1rem;
+    margin-top: 1rem;
+    padding:0 1rem 0 1rem;
+
+    /* padding: 1rem; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: .5rem;
+
+    position: fixed;
+    top: 4rem; 
+    border:1px solid rgba(255, 0, 0, 0.493);
   }
 
 .input-signup {
@@ -19,12 +26,14 @@
 
 .input-signup-submit {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    margin: 1rem auto;
     padding: 1rem;
     background-color: hsla(0, 0%, 67%, 0.178);
     color: white;
     border-radius: .5rem;
-    /* width: 3.5rem; */
+    width: 3.5rem;
+    background-color: rgba(0, 128, 0, 0.384);
 }
 
 label {
