@@ -1,12 +1,11 @@
 export const Form = ({ id, className, children }) => (
-    <form id={id} className={className}>
-        {children}
-    </form>
+    <form id={id} className={className}>{children}</form>
 )
 
 export const Label = ({ labelClassName, htmlFor, text }) => <label className={labelClassName} htmlFor={htmlFor} >{text}</label>
-export const Text = ({ htmlName, value, handleInputChange, handleInputClick }) => (
+export const Text = ({ className, htmlName, value, handleInputChange, handleInputClick }) => (
     <input
+        className={className}
         type='text'
         name={htmlName}
         value={value}
@@ -15,8 +14,9 @@ export const Text = ({ htmlName, value, handleInputChange, handleInputClick }) =
     />
 )
 
-export const Email = ({ htmlName, value, handleInputChange, handleInputClick }) => (
+export const Email = ({ className, htmlName, value, handleInputChange, handleInputClick }) => (
     <input
+        className={className}
         type='email'
         name={htmlName}
         value={value}
@@ -25,8 +25,9 @@ export const Email = ({ htmlName, value, handleInputChange, handleInputClick }) 
     />
 )
 
-export const Password = ({ htmlName, value, handleInputChange, handleInputClick }) => (
+export const Password = ({ className, htmlName, value, handleInputChange, handleInputClick }) => (
     <input
+        className={className}
         type="password"
         name={htmlName}
         value={value}

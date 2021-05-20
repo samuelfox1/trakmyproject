@@ -14,13 +14,18 @@ nav {
     
     color: white;
     background-color: rgb(0, 0, 0);
-    /* border-bottom: solid white 3px; */
-    /* border: solid white 5px; */
+    z-index: 1;
 }
 
 .nav-login-container {
-    flex-direction: column;
-    align-items: flex-start;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.nav-login-item {
+    max-width: 5rem;
+    margin-right: 1rem ;
 }
 
 .nav-logout-container {
@@ -37,22 +42,22 @@ nav {
 }
 
 .login-error-message {
-    margin: 0 0;
+    margin: 0 1rem 0 0;
     color:rgb(179, 49, 49)
 }
 
-.nav-login-input-container {
-    justify-content: space-between;
-}
-
-.nav-login-submit {
-    margin: 0 1rem;
-}
-
 .nav-brand-link {
-   color: rgb(255, 255, 255)
+    margin:0 1rem;
+    color: rgb(255, 255, 255)
 }
 .nav-brand-link:hover {
     font-size: 1.05rem;
-   color: red
+    color: red
+}
+
+
+@media screen and (max-width: 600px){
+    .nav-input-container{
+        flex-direction: column;        
+    }
 }

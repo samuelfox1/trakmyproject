@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../../UserContext'
 import { checkToken, loginUser } from '../../utils/userAPI'
-import { Button, H2, H4 } from '../Elements/Elements'
+import { Button, H2, H6 } from '../Elements/Elements'
 import { Form, Password, Submit, Text } from '../Elements/FormElements'
 import { Flex } from '../Flex/Flex'
 import './Nav.css'
@@ -49,7 +49,11 @@ export default function Nav() {
     })
 
     const loadUserData = useCallback((data, status) => {
-        if (status !== 200) return setLoginErrorMessage('username or password is incorrect')
+        if (status !== 200) {
+            setLoadingStatus(false)
+            setLoginErrorMessage('username or password is incorrect')
+            return
+        }
         const { user, token } = data
         localStorage.setItem('tmpToken', token)
         setLoggedInUser({ ...user, loggedIn: true })
@@ -79,40 +83,44 @@ export default function Nav() {
     return (
         <nav>
             <Link className='nav-brand-link' to='/'>TrackMyProject</Link>
-            <Flex >
-                {loggedIn
-                    ? <>
-                        <Flex className='nav-logout-container' >
-                            <H2 className='nav-username'>{loggedInUser.username}</H2>
-                            <Button onClick={handleLogout}>logout</Button>
-                        </Flex>
-                    </>
-                    : <>
-                        <Flex className='nav-login-container'>
-                            <Flex className='nav-login-input-container'>
-                                <Form>
-                                    <Text
-                                        htmlName='username'
-                                        value={username}
-                                        handleInputClick={handleinputClick}
-                                        handleInputChange={handleInputChange}
-                                    />
-                                    <Password
-                                        htmlName='password'
-                                        value={password.trim()}
-                                        handleInputClick={handleinputClick}
-                                        handleInputChange={handleInputChange}
-                                    />
-                                    <Submit className='nav-login-submit' handleSubmit={handleLogin}>Login</Submit>
-                                    <Button onClick={(e) => handleSignup(e)}>Sign Up</Button>
-                                </Form>
-                            </Flex>
-                            <H4 className='login-error-message'>{loginErrorMessage}</H4>
-                        </Flex>
-                    </>
-                }
+            {loggedIn
+                ? <>
+                    <Flex className='nav-logout-container' >
+                        <H2 className='nav-login-item'>{loggedInUser.username}</H2>
+                        <Button className='nav-login-item' onClick={handleLogout}>logout</Button>
+                    </Flex>
+                </>
+                : <>
+                    <Flex className='nav-login-container'>
+                        <H6 className='login-error-message'>{loginErrorMessage}</H6>
+                        <Form className='nav-login-container'>
 
-            </Flex>
+                            <Flex className='nav-input-container'>
+                                <Text
+                                    className='nav-login-item'
+                                    htmlName='username'
+                                    value={username}
+                                    handleInputClick={handleinputClick}
+                                    handleInputChange={handleInputChange}
+                                />
+                                <Password
+                                    className='nav-login-item'
+                                    htmlName='password'
+                                    value={password.trim()}
+                                    handleInputClick={handleinputClick}
+                                    handleInputChange={handleInputChange}
+                                />
+                            </Flex>
+
+                            <Flex className='nav-input-container'>
+                                <Submit className='nav-login-item' handleSubmit={(e) => handleLogin(e)}>Login</Submit>
+                                <Button className='nav-login-item' onClick={(e) => handleSignup(e)}>Sign Up</Button>
+                            </Flex>
+                        </Form>
+                    </Flex>
+                </>
+            }
+
         </nav>
     )
 }
