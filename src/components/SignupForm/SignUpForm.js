@@ -43,10 +43,7 @@ export const SignUpForm = () => {
         return () => localStorage.removeItem(componentName)
     }, [])
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target
-        setSignUpInputs({ ...signUpInputs, [name]: value })
-    }
+    const handleInputChange = (e) => setSignUpInputs({ ...signUpInputs, [e.target.name]: e.target.value })
 
     const handleSubmit = (e) => {
         e.preventDefault()

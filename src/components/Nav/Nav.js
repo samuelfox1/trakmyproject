@@ -8,7 +8,7 @@ import './Nav.css'
 
 
 export default function Nav() {
-    const [loginInputs, setLoginInputs] = useState({ username: 'sam0', password: 'password' })
+    const [loginInputs, setLoginInputs] = useState({ username: 'sam1', password: 'password' })
     const { username, password } = loginInputs
     const [loginErrorMessage, setLoginErrorMessage] = useState('')
     const { loggedInUser, setLoggedInUser } = useContext(UserContext)
@@ -16,11 +16,15 @@ export default function Nav() {
     const token = localStorage.getItem('tmpToken')
     const history = useHistory()
 
+    // setup local storage variable to avoid checking the token after a user logs in and token is updated
+    const loadingKey = 'loadingUserData'
+    useEffect(() => localStorage.setItem(loadingKey, false), [])
+    const setLoadingStatus = (boolean) => localStorage.setItem(loadingKey, boolean)
+    const checkLoadingStatus = () => localStorage.getItem(loadingKey) === 'true' ? true : false
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target
-        setLoginInputs({ ...loginInputs, [name]: value })
-    }
+
+    const handleInputChange = (e) => setLoginInputs({ ...loginInputs, [e.target.name]: e.target.value })
+
     const handleinputClick = (e) => {
         const { name } = e.target
         if (name === username) setLoginInputs({ ...loginInputs, username: '' })
@@ -32,11 +36,6 @@ export default function Nav() {
         history.push('/signup')
     }
 
-    // setup local storage variable to avoid checking the token after a user logs in and token is updated
-    const loadingKey = 'loadingUserData'
-    useEffect(() => localStorage.setItem(loadingKey, false), [])
-    const setLoadingStatus = (boolean) => localStorage.setItem(loadingKey, boolean)
-    const checkLoadingStatus = () => localStorage.getItem(loadingKey) === 'true' ? true : false
 
     const handleLogin = (e => {
         e.preventDefault()

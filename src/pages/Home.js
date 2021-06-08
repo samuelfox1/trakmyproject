@@ -9,18 +9,6 @@ export default function Home() {
         <>
             <Flex className='home-container'>
                 <UserInfo />
-                <UserInfo />
-                <UserInfo />
-                <UserInfo />
-
-                <UserProjects />
-            </Flex>
-            <Flex className='home-container'>
-                <UserInfo />
-                <UserInfo />
-                <UserInfo />
-                <UserInfo />
-
                 <UserProjects />
             </Flex>
         </>

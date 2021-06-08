@@ -6,7 +6,7 @@ import './UserInfo.css'
 export default function UserInfo() {
     const { loggedInUser } = useContext(UserContext)
     const { dateCreated } = loggedInUser
-    const { profilePic } = loggedInUser.data
+    const { profilePic } = loggedInUser
 
     console.log(loggedInUser)
     return (

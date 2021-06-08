@@ -32,11 +32,9 @@ export const createUser = (user) => {
     const formatted = {
         username: user.username,
         password: user.password,
-        data: {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email
-        }
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
     }
 
     return (
@@ -47,7 +45,7 @@ export const createUser = (user) => {
 }
 
 export const loginUser = ({ username, password }) => {
-    const URL = `${API_PREFIX}/api/login`
+    const URL = `${API_PREFIX}/api/user/login`
     const data = { username: username, password: password }
 
     return (
