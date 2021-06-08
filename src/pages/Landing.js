@@ -1,6 +1,5 @@
 import React from 'react'
-import { Header, Image, P, Span } from '../components/Elements/Elements'
-import { Flex } from '../components/Flex/Flex'
+import { Flex, Header, Image, P, Span } from '../components/Elements/Elements'
 import './Landing.css'
 
 export default function Landing() {

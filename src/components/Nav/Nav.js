@@ -2,9 +2,8 @@ import React, { useState, useEffect, useCallback, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../../UserContext'
 import { checkToken, loginUser } from '../../utils/userAPI'
-import { Button, H3, H6 } from '../Elements/Elements'
+import { Flex, Button, H3, H6 } from '../Elements/Elements'
 import { Form, Password, Submit, Text } from '../Elements/FormElements'
-import { Flex } from '../Flex/Flex'
 import './Nav.css'
 
 

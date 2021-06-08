@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex } from '../components/Flex/Flex'
+import { Flex } from '../components/Elements/Elements'
 import UserInfo from '../components/UserInfo/UserInfo'
 import UserProjects from '../components/UserProjects/UserProjects'
 

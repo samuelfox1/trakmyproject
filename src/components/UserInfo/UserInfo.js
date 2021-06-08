@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../../UserContext'
-import { H5, Image } from '../Elements/Elements'
-import { Flex } from '../Flex/Flex'
+import { Flex, H5, Image } from '../Elements/Elements'
 import './UserInfo.css'
 
 export default function UserInfo() {

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import { UserContext } from "./UserContext";
-import { Flex } from "./components/Flex/Flex";
 import Nav from "./components/Nav/Nav";
 import Landing from "./pages/Landing";
 import SignUp from "./pages/SignUp";
 import Home from './pages/Home'
 import './App.css';
 import Footer from "./components/Footer/Footer";
+import { Flex } from "./components/Elements/Elements";
 
 
 function App() {

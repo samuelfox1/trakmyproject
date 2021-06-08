@@ -3,9 +3,8 @@ import { useHistory } from 'react-router'
 import { checkAvailableEmail, checkAvailableUsername, createUser } from '../../utils/userAPI'
 import { UserContext } from '../../UserContext'
 import { Form, Label, Password, Submit, Text } from '../Elements/FormElements'
-import { Flex } from '../Flex/Flex'
 import './SignUpForm.css'
-import { H2 } from '../Elements/Elements'
+import { Flex, H2 } from '../Elements/Elements'
 
 
 export const SignUpForm = () => {

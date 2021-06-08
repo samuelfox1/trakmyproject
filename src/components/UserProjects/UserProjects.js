@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../../UserContext'
-import { H5 } from '../Elements/Elements'
-import { Flex } from '../Flex/Flex'
+import { Flex, H5 } from '../Elements/Elements'
 import './UserProjects.css'
 
 export default function UserProjects() {
