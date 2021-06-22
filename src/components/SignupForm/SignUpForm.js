@@ -100,7 +100,6 @@ export const SignUpForm = () => {
 
     //validate password
     useEffect(() => {
-
         password.length >= minPasswordLength
             ? setPasswordClassName('valid')
             : setPasswordClassName('error')
@@ -112,7 +111,6 @@ export const SignUpForm = () => {
             setValidPassword(false)
             setConfirmPasswordClassName('error')
         }
-
     }, [password, confirmPassword])
 
     //validateForm

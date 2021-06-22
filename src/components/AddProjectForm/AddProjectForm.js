@@ -9,7 +9,7 @@ export default function AddProjectForm() {
     const htmlNameGitHubRepo = 'gitHubRepo'
     const htmlNameDescription = 'description'
     const htmlNamePrivate = 'makePrivate'
-
+    //eslint-disable-next-line
     const [allowSubmit, setAllowSubmit] = useState(true)
     const [addProjectInputs, setAddProjectInputs] = useState({
         [htmlNameTitle]: 'title',
