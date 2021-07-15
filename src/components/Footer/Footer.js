@@ -5,7 +5,8 @@ import './Footer.css'
 export default function Footer() {
     return (
         <footer>
-            <H5>2021</H5>
+            <p>2021</p>
+            <a href='https://www.samueljfox.com'>samueljfox.com</a>
         </footer>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./context/UserContext";
 import Nav from "./components/Nav/Nav";
 import Landing from "./pages/Landing";
 import SignUp from "./pages/SignUp";

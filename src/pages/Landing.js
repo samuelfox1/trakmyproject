@@ -6,6 +6,7 @@ export default function Landing() {
 
     return (
         <>
+
             <Flex className='landing-container border-red'>
                 <Header className="App-header">
                     <P>Keep up to date with<br />
@@ -39,6 +40,7 @@ export default function Landing() {
                 <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Circle-icons-roadblock.svg/600px-Circle-icons-roadblock.svg.png" className="App-logo" alt="under construction" />
                 <br />
             </Flex>
+
         </>
     )
 }

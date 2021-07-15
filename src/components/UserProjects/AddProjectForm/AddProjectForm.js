@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Flex, H3 } from '../../Elements/Elements'
+import { Flex, H3 } from '../../Elements/Elements'
 import { Form, Label, Text, TextArea, Checkbox, Submit } from '../../Elements/FormElements'
 import './AddProjectForm.css'
 
@@ -32,7 +32,6 @@ export default function AddProjectForm() {
 
     return (
         <>
-            <Button> Add a project </Button>
             <Flex className="add-project-container border-red">
 
                 <Form>

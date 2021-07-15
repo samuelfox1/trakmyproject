@@ -1,23 +1,23 @@
+:root {
+  --red: rgba(255, 0, 0, 0.384)
+}
+
 .App {
-  height: 100vh;
+  min-height: 86vh;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 100vw;
-
-
-  position: static;
-  overflow: auto;
-  box-sizing: border-box;
-  padding-top: 1rem;
-  padding-bottom: 5rem;
-  top: 0;
-  z-index: -1;
-  /* border: 2.5px solid yellow; */
+  /* border: 1px solid yellow; */
   color: white;
+  
+  margin-top: 6vh;
+  padding: 1vh;
+
+  overflow-y: auto;
 }
+
 
 .emphasize{
   font-size: 2rem;
@@ -25,7 +25,7 @@
 }
 
 .border-red {
-  border:1px solid rgba(255, 0, 0, 0.493);
+  border:2px solid var(--red);
   border-radius: .5rem;
 }
 
@@ -37,7 +37,7 @@
   background-color: rgba(0, 128, 0, 0.384);
 }
 .error {
-  background-color: rgba(255, 0, 0, 0.384);
+  background-color: var(--red);
 }
 
 .App-logo {
