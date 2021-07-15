@@ -1,4 +1,4 @@
-import './style.css'
+import './Elements.css'
 
 export const Header = ({ className, children }) => <header className={className}>{children}</header>
 
@@ -15,12 +15,12 @@ export const H4 = ({ className, children }) => <h4 className={className}>{childr
 export const H5 = ({ className, children }) => <h5 className={className}>{children}</h5>
 export const H6 = ({ className, children }) => <h6 className={className}>{children}</h6>
 
-export const Flex = ({ className, children }) => <div className={className ? `${className} flex` : `flex`}>{children}</div>
+export const Flex = ({ className, children }) => <div className={`flex ${className}`}>{children}</div>
 
 export const Button = ({ className, onClick, children }) => (
     <button
         type="button"
-        className={className}
+        className={`button ${className ? className : null}`}
         onClick={onClick}
     >
         {children}

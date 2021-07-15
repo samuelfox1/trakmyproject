@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../../UserContext'
-import AddProjectForm from '../AddProjectForm/AddProjectForm'
+import AddProjectForm from './AddProjectForm/AddProjectForm'
 import { Flex } from '../Elements/Elements'
 import './UserProjects.css'
 

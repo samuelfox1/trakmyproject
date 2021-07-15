@@ -82,7 +82,7 @@ export default function Nav() {
         <nav>
             {loggedIn
                 ? <H3 className='nav-username'>hello, {loggedInUser.username}</H3>
-                : <Link className='nav-brand-link' to='/'>Welcome</Link>
+                : <Link className='nav-brand-link' to='/'>TrakMyProject</Link>
             }
 
             {loggedIn

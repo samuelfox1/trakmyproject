@@ -11,7 +11,7 @@ export const SignUpForm = () => {
     const { setLoggedInUser } = useContext(UserContext)
 
     const componentName = 'signUpForm'
-    const inputClassName = "input-signup"
+    const inputClassName = "input-signup border-radius"
     const htmlNameUsername = 'username'
     const htmlNameFirstName = 'firstName'
     const htmlNameLastName = 'lastName'
@@ -130,7 +130,7 @@ export const SignUpForm = () => {
     }, [signUpInputs, validEmail, validPassword])
 
     return (
-        <Flex className="signup-container">
+        <Flex className="signup-container border-red">
             <H2>Create an sccount</H2>
             <Form  >
                 <Flex className={inputClassName}>
@@ -159,7 +159,7 @@ export const SignUpForm = () => {
                 </Flex>
 
                 {allowSubmit
-                    ? <Flex className='input-signup-submit'>
+                    ? <Flex className='input-signup-submit border-radius'>
                         <Submit handleSubmit={handleSubmit}>Submit</Submit>
                     </Flex>
                     : null

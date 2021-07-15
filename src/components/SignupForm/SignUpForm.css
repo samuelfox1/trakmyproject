@@ -7,11 +7,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: .5rem;
 
     position: fixed;
     top: 4rem; 
-    border:1px solid rgba(255, 0, 0, 0.493);
   }
 
 .input-signup {
@@ -21,28 +19,18 @@
     padding: 1rem;
     background-color: hsla(0, 0%, 67%, 0.178);
     color: white;
-    border-radius: .5rem;
 }
 
 .input-signup-submit {
     display: flex;
     justify-content: center;
+    width: 3.5rem;
     margin: 1rem auto;
     padding: 1rem;
     background-color: hsla(0, 0%, 67%, 0.178);
     color: white;
-    border-radius: .5rem;
-    width: 3.5rem;
-    background-color: rgba(0, 128, 0, 0.384);
 }
 
 label {
     margin-right: 1rem;
-}
-
-.valid {
-    background-color: rgba(0, 128, 0, 0.384);
-}
-.error {
-    background-color: rgba(255, 0, 0, 0.384);
 }
