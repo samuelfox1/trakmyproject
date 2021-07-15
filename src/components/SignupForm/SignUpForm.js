@@ -65,7 +65,6 @@ export const SignUpForm = () => {
         checkAvailableUsername(username)
             .then(response => {
                 if (!localStorage.getItem(componentName)) return
-                console.log(response)
                 response
                     ? setUsernameClassName('valid')
                     : setUsernameClassName('error')
