@@ -5,6 +5,7 @@ export const Header = ({ className, children }) => <header className={className}
 export const Image = ({ src, className, alt }) => < img src={src} className={className} alt={alt} />
 
 export const P = ({ className, children }) => <p className={className}>{children}</p>
+export const A = ({ className, href, children }) => <a className={className} href={href}>{children}</a>
 
 export const Span = ({ className, children }) => <span className={className}>{children}</span>
 
@@ -20,7 +21,7 @@ export const Flex = ({ className, children }) => <div className={`flex ${classNa
 export const Button = ({ className, onClick, children }) => (
     <button
         type="button"
-        className={`button ${className ? className : null}`}
+        className={`border-red ${className ? className : null}`}
         onClick={onClick}
     >
         {children}

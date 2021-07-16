@@ -3,7 +3,18 @@
     display: flex;
 }
 
-.button {
+button, .button {
     background-color: rgba(0, 0, 0, 0);
     color: white;
+    padding:.5rem;
+    border:2px solid rgba(255, 0, 0, 0.384);
+    border-radius: .5rem;
+}
+
+button:hover, .button:hover, a:hover {
+    /* font-size: .9rem; */
+    /* box-shadow: -.1rem .1rem red; */
+    cursor: pointer;
+    border:3px solid rgba(255, 255, 0, 0.439);
+    border-radius: .5rem;
 }
