@@ -16,7 +16,6 @@ export default function Landing() {
                         you're building it.</P>
                 </Header>
                 <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Circle-icons-roadblock.svg/600px-Circle-icons-roadblock.svg.png" className="App-logo" alt="under construction" />
-                <br />
             </Flex>
             <Flex className='landing-container border-red'>
                 <Header className="App-header">
@@ -27,7 +26,6 @@ export default function Landing() {
                         you're building it.</P>
                 </Header>
                 <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Circle-icons-roadblock.svg/600px-Circle-icons-roadblock.svg.png" className="App-logo" alt="under construction" />
-                <br />
             </Flex>
             <Flex className='landing-container border-red'>
                 <Header className="App-header">
@@ -38,7 +36,6 @@ export default function Landing() {
                         you're building it.</P>
                 </Header>
                 <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Circle-icons-roadblock.svg/600px-Circle-icons-roadblock.svg.png" className="App-logo" alt="under construction" />
-                <br />
             </Flex>
 
         </>
