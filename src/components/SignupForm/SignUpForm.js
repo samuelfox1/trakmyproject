@@ -130,7 +130,7 @@ export const SignUpForm = () => {
 
     return (
         <Flex className="signup-container border-red">
-            <H2>Create an sccount</H2>
+            <H2>sign up</H2>
             <Form  >
                 <Flex className={inputClassName}>
                     <Label htmlFor={htmlNameFirstName} text='First Name:' />
