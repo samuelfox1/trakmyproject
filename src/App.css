@@ -65,3 +65,10 @@
     transform: rotate(360deg);
   }
 }
+
+@media screen and (max-width: 600px){
+  .App {
+      min-height:82vh;
+      margin-top: 10vh;
+  }
+}

@@ -26,7 +26,7 @@ nav {
     margin-right: 1rem ;
 } */
 :-webkit-any-link.signup {
-    font-size: .75rem;
+    font-size: .6rem;
     color:white;
     text-decoration: none;
     text-align: center;
@@ -75,11 +75,16 @@ a:-webkit-any-link.nav-brand-link {
 @media screen and (max-width: 600px){
 
     nav {
-        height:15vh
+        height:11vh
     }
 
     .nav-input-container{
+        margin-right: 1rem;
         flex-direction: column;  
         justify-content: space-around;      
+    }
+
+    .nav-login-item.button {
+        margin-bottom: 1rem;
     }
 }

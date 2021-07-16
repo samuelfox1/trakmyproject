@@ -4,12 +4,12 @@ import { UserContext } from '../../context/UserContext'
 import { UserProjectsContext } from '../../context/UserProjectsContext'
 import { checkToken, loginUser } from '../../utils/userAPI'
 import { Flex, Button, H6, P } from '../Elements/Elements'
-import { Form, Password, Submit, Text } from '../Elements/FormElements'
+import { Form, Label, Password, Submit, Text } from '../Elements/FormElements'
 import './Nav.css'
 
 
 export default function Nav() {
-    const [loginInputs, setLoginInputs] = useState({ username: 'sam1', password: 'password' })
+    const [loginInputs, setLoginInputs] = useState({ username: '', password: '' })
     const { username, password } = loginInputs
     const [loginErrorMessage, setLoginErrorMessage] = useState('')
     const { loggedInUser, setLoggedInUser } = useContext(UserContext)
@@ -76,6 +76,9 @@ export default function Nav() {
         history.push('/')
     }
 
+    const htmlNameUsername = 'username'
+    const htmlNamePassword = 'password'
+
     return (
         <nav>
             <Flex className='nav-brand-container'>
@@ -98,17 +101,19 @@ export default function Nav() {
                         <Form className='nav-login-container'>
 
                             <Flex className='nav-input-container'>
+                                <Label htmlFor={htmlNameUsername} text={htmlNameUsername}></Label>
                                 <Text
                                     className='nav-login-item'
-                                    htmlName='username'
+                                    htmlName={htmlNameUsername}
                                     value={username}
                                     handleInputClick={handleinputClick}
                                     handleInputChange={handleInputChange}
                                 />
+                                <Label htmlFor={htmlNamePassword} text={htmlNamePassword}></Label>
                                 <Password
                                     className='nav-login-item'
-                                    htmlName='password'
-                                    value={password.trim()}
+                                    htmlName={htmlNamePassword}
+                                    value={password}
                                     handleInputClick={handleinputClick}
                                     handleInputChange={handleInputChange}
                                 />
