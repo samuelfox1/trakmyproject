@@ -17,12 +17,32 @@ nav {
 .nav-login-container {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     flex-wrap: wrap;
 }
 
-.nav-login-item {
+/* .nav-login-item {
     max-width: 5rem;
     margin-right: 1rem ;
+} */
+:-webkit-any-link.signup {
+    font-size: .75rem;
+    color:white;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* .nav-input-container {
+
+} */
+
+.nav-brand-container {
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-brand-link:hover {
+    font-size: 1.025rem;
 }
 
 .nav-username {
@@ -43,10 +63,6 @@ nav {
     color:rgb(179, 49, 49)
 }
 
-.nav-brand-link:hover {
-    font-size: 1.05rem;
-    color: red
-}
 
 a:-webkit-any-link.nav-brand-link {
     margin:0 1rem;
@@ -57,7 +73,13 @@ a:-webkit-any-link.nav-brand-link {
 
 
 @media screen and (max-width: 600px){
+
+    nav {
+        height:15vh
+    }
+
     .nav-input-container{
-        flex-direction: column;        
+        flex-direction: column;  
+        justify-content: space-around;      
     }
 }

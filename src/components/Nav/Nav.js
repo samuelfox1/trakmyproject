@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
+import { UserProjectsContext } from '../../context/UserProjectsContext'
 import { checkToken, loginUser } from '../../utils/userAPI'
-import { Flex, Button, H3, H6 } from '../Elements/Elements'
+import { Flex, Button, H6, P } from '../Elements/Elements'
 import { Form, Password, Submit, Text } from '../Elements/FormElements'
 import './Nav.css'
 
@@ -12,6 +13,7 @@ export default function Nav() {
     const { username, password } = loginInputs
     const [loginErrorMessage, setLoginErrorMessage] = useState('')
     const { loggedInUser, setLoggedInUser } = useContext(UserContext)
+    const { setUserProjects } = useContext(UserProjectsContext)
     const { loggedIn } = loggedInUser
     const token = localStorage.getItem('tmpToken')
     const history = useHistory()
@@ -29,11 +31,6 @@ export default function Nav() {
         const { name } = e.target
         if (name === username) setLoginInputs({ ...loginInputs, username: '' })
         if (name === password) setLoginInputs({ ...loginInputs, password: '' })
-    }
-
-    const handleSignup = (e) => {
-        e.preventDefault()
-        history.push('/signup')
     }
 
 
@@ -55,10 +52,11 @@ export default function Nav() {
         const { user, token } = data
         localStorage.setItem('tmpToken', token)
         setLoggedInUser({ ...user, loggedIn: true })
+        setUserProjects(user.projects)
         setLoginInputs({ username: 'username', password: 'password' })
         setLoadingStatus(false)
         history.push(`/user/${user.username}`)
-    }, [history, setLoggedInUser])
+    }, [history, setLoggedInUser, setUserProjects])
 
     const isTokenExpired = useCallback(() => {
         if (!token || checkLoadingStatus()) return
@@ -80,10 +78,17 @@ export default function Nav() {
 
     return (
         <nav>
-            {loggedIn
-                ? <H3 className='nav-username'>hello, {loggedInUser.username}</H3>
-                : <Link className='nav-brand-link' to='/'>TrakMyProject</Link>
-            }
+            <Flex className='nav-brand-container'>
+                <Link className='nav-brand-link' to='/'>TrakMyProject</Link>
+
+                {loggedIn
+                    ? <>
+                        <P>|</P>
+                        <Link className='nav-brand-link' to={`/user/${loggedInUser.username}`}> {loggedInUser.username}</Link>
+                    </>
+                    : null
+                }
+            </Flex>
 
             {loggedIn
                 ? <Button className='nav-login-item' onClick={handleLogout}>logout</Button>
@@ -110,8 +115,8 @@ export default function Nav() {
                             </Flex>
 
                             <Flex className='nav-input-container'>
-                                <Submit className='nav-login-item' handleSubmit={(e) => handleLogin(e)}>Login</Submit>
-                                <Button className='nav-login-item' onClick={(e) => handleSignup(e)}>Sign Up</Button>
+                                <Submit className='nav-login-item button' handleSubmit={(e) => handleLogin(e)}>Login</Submit>
+                                <Link className='nav-login-item signup' to='/signup'>Sign Up</Link>
                             </Flex>
                         </Form>
                     </Flex>
