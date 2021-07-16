@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
-import { UserContext } from '../../context/UserContext'
+import { UserProjectsContext } from '../../context/UserProjectsContext'
 import { Flex } from '../Elements/Elements'
 import ProjectCard from './ProjectCard/ProjectCard'
 import './UserProjects.css'
 
 export default function UserProjects() {
-    const { loggedInUser } = useContext(UserContext)
-    const { projects } = loggedInUser
-    const tempData = ['project-0', 'project-1', 'project-2', 'project-3', 'project-4',]
-    console.log(projects)
+    const { userProjects } = useContext(UserProjectsContext)
+
+    const formattedArray = userProjects.slice(0).reverse()
+
     return (
         <Flex className='projects-container'>
-            {tempData.map((project, idx) => <ProjectCard key={idx} project={project} />)}
+            {formattedArray.map((project, idx) => <ProjectCard key={idx} project={project} />)}
         </Flex>
     )
 }
