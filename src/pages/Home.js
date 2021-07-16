@@ -13,13 +13,12 @@ export default function Home() {
 
     return (
         <>
-            <Flex className='border-red'>
-                <UserInfo />
-            </Flex>
+            <UserInfo />
+            <br />
             <Button onClick={toggleDisplayForm}>Add a project</Button>
 
             <Flex className='projects-container'>
-                {displayForm ? <AddProjectForm /> : null}
+                {displayForm ? <AddProjectForm toggleDisplayForm={toggleDisplayForm} /> : null}
                 <UserProjects />
             </Flex>
         </>
