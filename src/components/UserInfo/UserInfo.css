@@ -10,6 +10,7 @@
     padding:1rem;
     
     background-color: rgb(156, 156, 156);
+    border-radius: .5rem;
 }
 
 .profile-pic {
