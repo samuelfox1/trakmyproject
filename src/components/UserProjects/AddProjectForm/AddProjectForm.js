@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { UserProjectsContext } from '../../../context/UserProjectsContext'
 import { Flex, H3 } from '../../Elements/Elements'
 import { Form, Label, Text, TextArea, Checkbox, Submit } from '../../Elements/FormElements'
 import './AddProjectForm.css'
 
-export default function AddProjectForm() {
+export default function AddProjectForm({ toggleDisplayForm }) {
     const inputClassName = "input-add-project border-radius"
 
     const htmlNameTitle = 'title'
@@ -18,16 +19,18 @@ export default function AddProjectForm() {
         [htmlNameDescription]: 'description',
         [htmlNamePrivate]: false
     })
-
+    const { userProjects } = useContext(UserProjectsContext)
     const { title, gitHubRepo, description, makePrivate } = addProjectInputs
 
     const handleInputChange = (e) => {
         setAddProjectInputs({ ...addProjectInputs, [e.target.name]: e.target.value || e.target.checked })
     }
 
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(addProjectInputs)
+        userProjects.push(addProjectInputs)
+        toggleDisplayForm()
     }
 
     return (
