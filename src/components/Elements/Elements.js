@@ -5,7 +5,6 @@ export const Header = ({ className, children }) => <header className={className}
 export const Image = ({ src, className, alt }) => < img src={src} className={className} alt={alt} />
 
 export const P = ({ className, children }) => <p className={className}>{children}</p>
-export const A = ({ className, href, children }) => <a className={className} href={href}>{children}</a>
 
 export const Span = ({ className, children }) => <span className={className}>{children}</span>
 
@@ -18,6 +17,15 @@ export const H6 = ({ className, children }) => <h6 className={className}>{childr
 
 export const Flex = ({ className, children }) => <div className={`flex ${className}`}>{children}</div>
 
+export const A = ({ className, href, stayOnPage, children }) => (
+    <a
+        className={className}
+        href={href}
+        target={`${stayOnPage ? '' : '_blank'}`}
+    >
+        {children}
+    </a>
+)
 export const Button = ({ className, onClick, children }) => (
     <button
         type="button"
