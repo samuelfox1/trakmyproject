@@ -9,7 +9,7 @@ import './Nav.css'
 
 
 export default function Nav() {
-    const [loginInputs, setLoginInputs] = useState({ username: '', password: '' })
+    const [loginInputs, setLoginInputs] = useState({ username: 'sam0', password: 'password' })
     const { username, password } = loginInputs
     const [loginErrorMessage, setLoginErrorMessage] = useState('')
     const { loggedInUser, setLoggedInUser } = useUserData()

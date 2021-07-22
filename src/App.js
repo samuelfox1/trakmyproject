@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import { UserProjectsContext } from "./utils/context/UserProjectsContext";
 import { useUserData } from './utils/context/UserProvider'

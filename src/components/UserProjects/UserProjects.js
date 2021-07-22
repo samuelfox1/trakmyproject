@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { UserProjectsContext } from '../../context/UserProjectsContext'
+import { UserProjectsContext } from '../../utils/context/UserProjectsContext'
 import { Flex } from '../Elements/Elements'
 import ProjectCard from './ProjectCard/ProjectCard'
 import './UserProjects.css'

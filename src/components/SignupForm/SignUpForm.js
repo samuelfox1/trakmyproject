@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { checkAvailableEmail, checkAvailableUsername, createUser } from '../../utils/userAPI'
-import { UserContext } from '../../context/UserContext'
+import { useUserData } from '../../utils/context/UserProvider'
 import { Form, Label, Password, Submit, Text } from '../Elements/FormElements'
 import './SignUpForm.css'
 import { Flex, H2 } from '../Elements/Elements'
 
 
 export const SignUpForm = () => {
-    const { setLoggedInUser } = useContext(UserContext)
+
+    const { setLoggedInUser } = useUserData()
 
     const componentName = 'signUpForm'
     const inputClassName = "input-signup border-radius"

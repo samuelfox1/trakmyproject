@@ -8,9 +8,6 @@ const UserProvider = (props) => {
     const [loggedInUser, setLoggedInUser] = useState({
         loggedIn: false,
         username: 'username-string',
-        name: 'John',
-        role: 'Admin',
-        id: 142323,
     });
 
     return (
