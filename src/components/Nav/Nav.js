@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { UserContext } from '../../context/UserContext'
-import { UserProjectsContext } from '../../context/UserProjectsContext'
+import { useUserData } from '../../utils/context/UserProvider'
+import { UserProjectsContext } from '../../utils/context/UserProjectsContext'
 import { checkToken, loginUser } from '../../utils/userAPI'
 import { Flex, Button, H6, P } from '../Elements/Elements'
 import { Form, Label, Password, Submit, Text } from '../Elements/FormElements'
@@ -12,7 +12,7 @@ export default function Nav() {
     const [loginInputs, setLoginInputs] = useState({ username: '', password: '' })
     const { username, password } = loginInputs
     const [loginErrorMessage, setLoginErrorMessage] = useState('')
-    const { loggedInUser, setLoggedInUser } = useContext(UserContext)
+    const { loggedInUser, setLoggedInUser } = useUserData()
     const { setUserProjects } = useContext(UserProjectsContext)
     const { loggedIn } = loggedInUser
     const token = localStorage.getItem('tmpToken')
