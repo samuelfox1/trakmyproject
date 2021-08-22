@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Redirect, Route, useHistory } from "react-rout
 import { useUserData } from './utils/context/UserProvider'
 import Nav from "./components/Nav/Nav";
 import Landing from "./pages/Landing";
-import SignUp from "./pages/SignUp";
 import Home from './pages/Home'
 import './App.css';
 import Footer from "./components/Footer/Footer";
 import { Flex } from "./components/Elements/Elements";
 import { checkToken } from "./utils/userAPI";
 import LoginForm from "./components/LoginForm/LoginForm";
+import { SignUpForm } from "./components/SignupForm/SignUpForm";
 
 
 function App() {
@@ -70,7 +70,7 @@ function App() {
         </Route>
 
         <Route exact path='/signup'>
-          <SignUp />
+          <SignUpForm />
         </Route>
 
         <Route exact path='/user/:username'>
