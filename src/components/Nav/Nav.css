@@ -51,12 +51,6 @@ nav {
     margin: 0 1rem
 }
 
-.login-error-message {
-    margin: 0 1rem 0 0;
-    color:rgb(179, 49, 49)
-}
-
-
 a:-webkit-any-link.nav-brand-link {
     margin:0 1rem;
     color: rgb(255, 255, 255);
