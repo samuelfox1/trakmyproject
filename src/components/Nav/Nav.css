@@ -14,13 +14,6 @@ nav {
     z-index: 1;
 }
 
-.nav-login-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
 /* .nav-login-item {
     max-width: 5rem;
     margin-right: 1rem ;
@@ -76,15 +69,5 @@ a:-webkit-any-link.nav-brand-link {
 
     nav {
         height:11vh
-    }
-
-    .nav-input-container{
-        margin-right: 1rem;
-        flex-direction: column;  
-        justify-content: space-around;      
-    }
-
-    .nav-login-item.button {
-        margin-bottom: 1rem;
     }
 }
