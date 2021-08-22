@@ -9,7 +9,7 @@ import './App.css';
 import Footer from "./components/Footer/Footer";
 import { Flex } from "./components/Elements/Elements";
 import { checkToken } from "./utils/userAPI";
-import LoginContainer from "./components/Nav/LoginContainer";
+import LoginForm from "./components/LoginForm/LoginForm";
 
 
 function App() {
@@ -62,7 +62,7 @@ function App() {
         </Route>
 
         <Route exact path='/login'>
-          <LoginContainer
+          <LoginForm
             getLoadingStatus={getLoadingStatus}
             setLoadingStatus={setLoadingStatus}
             loadUserData={loadUserData}
