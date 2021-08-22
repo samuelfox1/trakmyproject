@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react'
-import { UserProjectsContext } from '../../../utils/context/UserProjectsContext'
+import React, { useState } from 'react'
 import { Flex, H3 } from '../../Elements/Elements'
 import { Form, Label, Text, TextArea, Checkbox, Submit } from '../../Elements/FormElements'
 import './AddProjectForm.css'
@@ -19,7 +18,7 @@ export default function AddProjectForm({ toggleDisplayForm }) {
         [htmlNameDescription]: 'description',
         [htmlNamePrivate]: false
     })
-    const { userProjects } = useContext(UserProjectsContext)
+    // const { userProjects } = useContext(UserProjectsContext)
     const { title, gitHubRepo, description, makePrivate } = addProjectInputs
 
     const handleInputChange = (e) => {
@@ -29,7 +28,8 @@ export default function AddProjectForm({ toggleDisplayForm }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        userProjects.push(addProjectInputs)
+
+        // userProjects.push(addProjectInputs)
         toggleDisplayForm()
     }
 
