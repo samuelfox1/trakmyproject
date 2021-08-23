@@ -7,8 +7,8 @@ export const useDisplayContext = () => useContext(DisplayContext)
 const DisplayProvider = (props) => {
     const [display, setDisplay] = useState({
         modal: false,
-        login: false,
-        signUp: false,
+        loginForm: false,
+        signUpForm: false,
         pageNotFound: true,
     });
 

@@ -15,10 +15,10 @@ export default function Landing() {
     const displaySignUpForm = () => setModal(<Modal><SignUpForm /></Modal>)
 
     useEffect(() => {
-        if (display?.login) return displayLoginForm()
-        if (display?.signUp) return displaySignUpForm()
+        if (display?.loginForm) return displayLoginForm()
+        if (display?.signUpForm) return displaySignUpForm()
         setModal(null)
-    }, [display?.login, display?.signUp])
+    }, [display?.loginForm, display?.signUpForm])
 
     return (
         <>
