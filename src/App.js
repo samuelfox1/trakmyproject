@@ -61,9 +61,10 @@ function App() {
           <Home />
         </Route>
 
-        <Route path='/'>
+        {/* <Route path='/'>
           <PageNotFound />
-        </Route>
+        </Route> */}
+
       </Flex>
       <Footer />
     </Router >
