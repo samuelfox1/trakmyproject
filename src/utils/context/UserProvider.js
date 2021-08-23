@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext } from 'react';
 
 export const UserContext = createContext()
 
-export const useUserData = () => useContext(UserContext)
+export const useUserContext = () => useContext(UserContext)
 
 const UserProvider = (props) => {
     const [loggedInUser, setLoggedInUser] = useState({
