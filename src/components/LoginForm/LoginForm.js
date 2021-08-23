@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { loginUser } from '../../utils/userAPI'
-import { Flex, H6 } from '../Elements/Elements'
+import { H1, H6 } from '../Elements/Elements'
 import { Form, Label, Password, Submit, Text } from '../Elements/FormElements'
 import './LoginForm.css'
 
@@ -37,7 +37,8 @@ export default function LoginForm({ getLoadingStatus, setLoadingStatus, loadUser
     const htmlNamePassword = 'password'
 
     return (
-        <Form id='login-form' className=' border-red'>
+        <Form id='login-form' className=''>
+            <H1 className='reset'>Login</H1>
             <H6 className='login-error-message'>{loginErrorMessage}</H6>
             <Label htmlFor={htmlNameUsername} text={htmlNameUsername}></Label>
             <Text

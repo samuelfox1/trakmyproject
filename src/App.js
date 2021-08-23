@@ -1,29 +1,25 @@
 import React, { useEffect, useCallback } from "react";
 import { BrowserRouter as Router, Redirect, Route, useHistory } from "react-router-dom";
-import { useUserData } from './utils/context/UserProvider'
+import { useUserContext } from './utils/context/UserProvider'
 import Nav from "./components/Nav/Nav";
-import Landing from "./pages/Landing";
-import Home from './pages/Home'
-import './App.css';
+import Landing from "./pages/Landing/Landing";
+import Home from './pages/Home/Home'
 import Footer from "./components/Footer/Footer";
 import { Flex } from "./components/Elements/Elements";
 import { checkToken } from "./utils/userAPI";
-import LoginForm from "./components/LoginForm/LoginForm";
-import { SignUpForm } from "./components/SignupForm/SignUpForm";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import './App.css';
 
 
 function App() {
-  const { loggedInUser, setLoggedInUser } = useUserData()
+  const { loggedInUser, setLoggedInUser } = useUserContext()
   const { loggedIn, username } = loggedInUser
+  const { getLoadingStatus, setLoadingStatus } = useUserContext()
+  const token = localStorage.getItem('tmpToken')
   const history = useHistory()
 
-  const token = localStorage.getItem('tmpToken')
   const loadingKey = 'loadingUserData'
   useEffect(() => localStorage.setItem(loadingKey, false))
-
-  const setLoadingStatus = (boolean) => localStorage.setItem(loadingKey, boolean)
-  const getLoadingStatus = () => localStorage.getItem(loadingKey) === 'true' ? true : false
-
 
   const loadUserData = useCallback((data, status) => {
     if (status !== 200) return setLoadingStatus(false)
@@ -34,7 +30,7 @@ function App() {
     setLoadingStatus(false)
     history.push(`/user/${user.username}`)
 
-  }, [history, setLoggedInUser])
+  }, [history, setLoggedInUser, setLoadingStatus])
 
   const isTokenExpired = useCallback(() => {
     if (!token || getLoadingStatus()) return
@@ -44,7 +40,7 @@ function App() {
       .then(({ data, status }) => loadUserData(data, status))
       .catch(error => console.log(error))
 
-  }, [token, loadUserData])
+  }, [token, loadUserData, getLoadingStatus, setLoadingStatus])
 
   useEffect(() => {
     isTokenExpired()
@@ -55,27 +51,19 @@ function App() {
     <Router>
       {loggedIn && <Redirect to={`/user/${username}`} />}
       <Nav />
-      <Flex className='App'>
+      <Flex id='App' className='App'>
 
         <Route exact path='/'>
           <Landing />
         </Route>
 
-        <Route exact path='/login'>
-          <LoginForm
-            getLoadingStatus={getLoadingStatus}
-            setLoadingStatus={setLoadingStatus}
-            loadUserData={loadUserData}
-          />
-        </Route>
-
-        <Route exact path='/signup'>
-          <SignUpForm />
-        </Route>
-
         <Route exact path='/user/:username'>
           <Home />
         </Route>
+
+        {/* <Route path='/'>
+          <PageNotFound />
+        </Route> */}
 
       </Flex>
       <Footer />

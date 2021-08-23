@@ -1,20 +1,29 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { useUserData } from '../../utils/context/UserProvider'
+import { useDisplayContext } from '../../utils/context/DisplayProvider'
+import { useUserContext } from '../../utils/context/UserProvider'
 import { Flex, Button, P } from '../Elements/Elements'
 import './Nav.css'
 
 
 export default function Nav() {
 
-    const { loggedInUser, setLoggedInUser } = useUserData()
+    const { loggedInUser, setLoggedInUser } = useUserContext()
     const { loggedIn } = loggedInUser
+    const { display, setDisplay } = useDisplayContext()
     const history = useHistory()
 
     const handleLogout = () => {
         localStorage.removeItem('tmpToken')
         setLoggedInUser({ isLoggedIn: false })
         history.push('/')
+    }
+
+    const handleLoginClick = () => {
+        setDisplay({ ...display, modal: true, login: true, signUp: false })
+    }
+    const handleSignUpClick = () => {
+        setDisplay({ ...display, modal: true, signUp: true, login: false })
     }
 
     return (
@@ -31,8 +40,8 @@ export default function Nav() {
             {loggedIn
                 ? <Button className='nav-login-item' onClick={handleLogout}>logout</Button>
                 : <div>
-                    <Button className='nav-login-item' onClick={() => history.push('/login')}>login</Button>
-                    <Button className='nav-login-item' onClick={() => history.push('/signup')} >sign up</Button>
+                    <Button className='nav-login-item' onClick={handleLoginClick}>login</Button>
+                    <Button className='nav-login-item' onClick={handleSignUpClick} >sign up</Button>
                 </div>
             }
         </nav>

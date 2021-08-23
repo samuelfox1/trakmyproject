@@ -15,7 +15,7 @@ export const H4 = ({ className, children }) => <h4 className={className}>{childr
 export const H5 = ({ className, children }) => <h5 className={className}>{children}</h5>
 export const H6 = ({ className, children }) => <h6 className={className}>{children}</h6>
 
-export const Flex = ({ className, children }) => <div className={`flex ${className}`}>{children}</div>
+export const Flex = ({ id, className, children }) => <div id={id} className={`flex ${className}`}>{children}</div>
 
 export const A = ({ className, href, stayOnPage, children }) => (
     <a
