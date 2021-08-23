@@ -30,11 +30,12 @@
 /* Modal Content/Box */
 .modal-content {
     position: absolute;
-    min-width: 30%;
-    min-height:200px;
-    margin: 25% auto; 
+    max-height:70vh;
+    margin: 150px auto;
+    padding: 0 5% 5% 5%;
     z-index:2;
     background-color: rgba(0, 0, 0, 0.918); /* Black w/ opacity */
+    overflow: scroll;
   }
   
   /* The Close Button */

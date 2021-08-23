@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { checkAvailableEmail, checkAvailableUsername, createUser } from '../../utils/userAPI'
 import { useUserContext } from '../../utils/context/UserProvider'
-import { Form, Label, Password, Submit, Text } from '../Elements/FormElements'
-import { Flex, H2 } from '../Elements/Elements'
+import { Form, Label, Password, Text } from '../Elements/FormElements'
+import { Button, Flex, H2 } from '../Elements/Elements'
 import './SignUpForm.css'
+import { DisplayContext, useDisplayContext } from '../../utils/context/DisplayProvider'
 
 
 export default function SignUpForm() {
 
     const { setLoggedInUser } = useUserContext()
+    const { display, setDisplay } = useDisplayContext()
 
     const componentName = 'signUpForm'
     const inputClassName = "input-signup border-radius"
@@ -25,9 +27,10 @@ export default function SignUpForm() {
     const [usernameClassName, setUsernameClassName] = useState('')
     const [passwordClassName, setPasswordClassName] = useState('')
     const [emailClassName, setEmailClassName] = useState('')
+    const [validUsername, setValidUsername] = useState(false)
+    const [validEmail, setValidEmail] = useState(false)
     const [validPassword, setValidPassword] = useState(false)
     const [allowSubmit, setAllowSubmit] = useState(false)
-    const [validEmail, setValidEmail] = useState(false)
     const [signUpInputs, setSignUpInputs] = useState({
         username: '',
         password: 'password',
@@ -51,6 +54,7 @@ export default function SignUpForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        if (!allowSubmit) return
         createUser(signUpInputs)
             .then(({ data }) => {
                 const { user, token } = data
@@ -58,26 +62,31 @@ export default function SignUpForm() {
                 if (!user) console.log('failed to create new user')
                 setLoggedInUser({ ...user, loggedIn: true })
                 localStorage.setItem('tmpToken', token)
+                setDisplay({ ...display, modal: false, signUpForm: false })
                 history.push(`/user/${user.username}`)
             })
             .catch(err => console.log(err))
     }
 
+    // check available username
     useEffect(() => {
         if (!username) return setUsernameClassName('')
 
         checkAvailableUsername(username)
-            .then(response => {
-                console.log(response)
+            .then(usernameExists => {
                 if (!localStorage.getItem(componentName)) return
-                response
-                    ? setUsernameClassName('valid')
-                    : setUsernameClassName('error')
+                if (usernameExists) {
+                    setUsernameClassName('error')
+                    setValidUsername(false)
+                    return
+                }
+                setUsernameClassName('')
+                setValidUsername(true)
             })
             .catch(err => console.log(err))
     }, [username])
 
-    //validate email
+    // validate format & check available email
     useEffect(() => {
         const emailArr = email.split('')
 
@@ -85,11 +94,11 @@ export default function SignUpForm() {
             && emailArr.indexOf('@') !== -1
             && emailArr.indexOf('.') !== -1) {
             checkAvailableEmail(email)
-                .then(newEmail => {
+                .then(emailExists => {
                     if (!localStorage.getItem(componentName)) return
-                    if (!newEmail) {
-                        setValidEmail(false)
+                    if (emailExists) {
                         setEmailClassName('error')
+                        setValidEmail(false)
                         return
                     }
                     setValidEmail(true)
@@ -97,9 +106,6 @@ export default function SignUpForm() {
                 })
                 .catch(err => console.log(err))
         }
-        // ? setValidEmail(true) && setEmailClassName('valid')
-        // : setValidEmail(false) && setEmailClassName('error')
-
     }, [email])
 
     //validate password
@@ -127,49 +133,48 @@ export default function SignUpForm() {
             }
             return true
         }
-        validEmail && validPassword && validateForm()
+        validUsername && validEmail && validPassword && validateForm()
             ? setAllowSubmit(true)
             : setAllowSubmit(false)
 
-    }, [signUpInputs, validEmail, validPassword])
+    }, [signUpInputs, validUsername, validEmail, validPassword])
 
     return (
-        <Flex className="signup-container border-red">
+        <Form className='signup-container' >
             <H2>sign up</H2>
-            <Form  >
-                <Flex className={inputClassName}>
-                    <Label htmlFor={htmlNameFirstName} text='First Name:' />
-                    <Text htmlName={htmlNameFirstName} value={firstName} handleInputChange={handleInputChange} />
-                </Flex>
-                <Flex className={inputClassName}>
-                    <Label htmlFor={htmlNameLastName} text='Last Name:' />
-                    <Text htmlName={htmlNameLastName} value={lastName} handleInputChange={handleInputChange} />
-                </Flex>
-                <Flex className={`${inputClassName} ${emailClassName}`}>
-                    <Label htmlFor={htmlNameEmail} text='Email:' />
-                    <Text htmlName={htmlNameEmail} value={email.trim()} handleInputChange={handleInputChange} />
-                </Flex>
-                <Flex className={`${inputClassName} ${usernameClassName}`}>
-                    <Label htmlFor={htmlNameUsername} text='Username:' />
-                    <Text htmlName={htmlNameUsername} value={username} handleInputChange={handleInputChange} />
-                </Flex>
-                <Flex className={`${inputClassName} ${passwordClassName}`}>
-                    <Label htmlFor={htmlNamePassword} text='Password:' />
-                    <Password htmlName={htmlNamePassword} value={password.trim()} handleInputChange={handleInputChange} />
-                </Flex>
-                <Flex className={`${inputClassName} ${confirmPasswordClassName}`}>
-                    <Label htmlFor={htmlNameConfirmPassword} text='Confrim PW:' />
-                    <Password htmlName={htmlNameConfirmPassword} value={confirmPassword.trim()} handleInputChange={handleInputChange} />
-                </Flex>
+            <Flex className={inputClassName}>
+                <Label htmlFor={htmlNameFirstName} text='First Name:' />
+                <Text htmlName={htmlNameFirstName} value={firstName} handleInputChange={handleInputChange} />
+            </Flex>
+            <Flex className={inputClassName}>
+                <Label htmlFor={htmlNameLastName} text='Last Name:' />
+                <Text htmlName={htmlNameLastName} value={lastName} handleInputChange={handleInputChange} />
+            </Flex>
+            <Flex className={`${inputClassName} ${emailClassName}`}>
+                <Label htmlFor={htmlNameEmail} text='Email:' />
+                <Text htmlName={htmlNameEmail} value={email.trim()} handleInputChange={handleInputChange} />
+            </Flex>
+            <Flex className={`${inputClassName} ${usernameClassName}`}>
+                <Label htmlFor={htmlNameUsername} text='Username:' />
+                <Text htmlName={htmlNameUsername} value={username} handleInputChange={handleInputChange} />
+            </Flex>
+            <Flex className={`${inputClassName} ${passwordClassName}`}>
+                <Label htmlFor={htmlNamePassword} text='Password:' />
+                <Password htmlName={htmlNamePassword} value={password.trim()} handleInputChange={handleInputChange} />
+            </Flex>
+            <Flex className={`${inputClassName} ${confirmPasswordClassName}`}>
+                <Label htmlFor={htmlNameConfirmPassword} text='Confrim PW:' />
+                <Password htmlName={htmlNameConfirmPassword} value={confirmPassword.trim()} handleInputChange={handleInputChange} />
+            </Flex>
 
-                <Submit handleSubmit={handleSubmit}>Submit</Submit>
-                {allowSubmit
-                    ? <Flex className='input-signup-submit border-radius'>
-                        <Submit handleSubmit={handleSubmit}>Submit</Submit>
-                    </Flex>
-                    : null
-                }
-            </Form>
-        </Flex>
+            {allowSubmit
+                // ? <Flex className='input-signup-submit border-radius'>
+                //     <Submit onClick={handleSubmit}>Submit</Submit>
+                // </Flex>
+                ? <Button onClick={handleSubmit}>Submit</Button>
+
+                : null
+            }
+        </Form>
     )
 }
