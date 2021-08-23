@@ -11,9 +11,8 @@ export default function Modal({ className, children }) {
             < div id="myModal" className={`${className ? className : ''} modal`} >
 
                 <div className="modal-content border-red">
-                    {/* <span className="close">&times;</span> */}
+                    <span className="close">&times;</span>
                     {children}
-                    <Link to='/'><Button>Home</Button></Link>
                 </div>
 
             </div >

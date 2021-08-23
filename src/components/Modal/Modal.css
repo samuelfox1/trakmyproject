@@ -16,7 +16,9 @@
 .modal {
     position: fixed;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     z-index: 1;
     left: 0;
     top: 0;
