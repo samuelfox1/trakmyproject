@@ -38,8 +38,8 @@
   /* The Close Button */
   .close {
     position: absolute;
-    color: #aaa;
     right:10px;
+    color: #aaa;
     font-size: 28px;
     font-weight: bold;
   }
