@@ -140,7 +140,7 @@ export default function SignUpForm() {
     }, [signUpInputs, validUsername, validEmail, validPassword])
 
     return (
-        <Form  >
+        <Form className='signup-container' >
             <H2>sign up</H2>
             <Flex className={inputClassName}>
                 <Label htmlFor={htmlNameFirstName} text='First Name:' />
