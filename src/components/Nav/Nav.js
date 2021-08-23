@@ -38,10 +38,10 @@ export default function Nav() {
                 }
             </Flex>
             {loggedIn
-                ? <Button className='nav-login-item' onClick={handleLogout}>logout</Button>
+                ? <Button className='nav-button' onClick={handleLogout}>logout</Button>
                 : <div>
-                    <Button className='nav-login-item' onClick={handleLoginClick}>login</Button>
-                    <Button className='nav-login-item' onClick={handleSignUpClick} >sign up</Button>
+                    <Button className='nav-button' onClick={handleLoginClick}>login</Button>
+                    <Button className='nav-button' onClick={handleSignUpClick} >sign up</Button>
                 </div>
             }
         </nav>
