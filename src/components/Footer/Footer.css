@@ -1,4 +1,7 @@
 footer {
+    position: relative;
+    bottom: 0; 
+
     height:6vh;
     width: 100vw;
 
@@ -6,9 +9,7 @@ footer {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-
-    position: relative;
-    bottom: 0; 
+    z-index: 1;
     
     color: white;
     background-color: rgb(0, 0, 0);
