@@ -1,9 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Button } from '../Elements/Elements'
+import { useDisplayContext } from '../../utils/context/DisplayProvider'
 import './Modal.css'
 
 export default function Modal({ className, children }) {
+    const { display, setDisplay } = useDisplayContext()
+
+    const closeModal = () => setDisplay({ ...display, modal: false })
 
     return (
         <>
@@ -11,7 +13,7 @@ export default function Modal({ className, children }) {
             < div id="myModal" className={`${className ? className : ''} modal`} >
 
                 <div className="modal-content border-red">
-                    <span className="close">&times;</span>
+                    <span className="close" onClick={closeModal}>&times;</span>
                     {children}
                 </div>
 
