@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { useUserData } from '../../utils/context/UserProvider'
+import { useUserContext } from '../../utils/context/UserProvider'
 import { Flex, Button, P } from '../Elements/Elements'
 import './Nav.css'
 
 
 export default function Nav() {
 
-    const { loggedInUser, setLoggedInUser } = useUserData()
+    const { loggedInUser, setLoggedInUser } = useUserContext()
     const { loggedIn } = loggedInUser
     const history = useHistory()
 
