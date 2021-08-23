@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Button, Flex } from '../components/Elements/Elements'
-import UserInfo from '../components/UserInfo/UserInfo'
-import AddProjectForm from '../components/UserProjects/AddProjectForm/AddProjectForm'
-import UserProjects from '../components/UserProjects/UserProjects'
+import { Button, Flex } from '../../components/Elements/Elements'
+import UserInfo from '../../components/UserInfo/UserInfo'
+import AddProjectForm from '../../components/UserProjects/AddProjectForm/AddProjectForm'
+import UserProjects from '../../components/UserProjects/UserProjects'
 import './Home.css'
 
 export default function Home() {

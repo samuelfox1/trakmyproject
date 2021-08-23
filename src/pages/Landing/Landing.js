@@ -1,11 +1,20 @@
 import React from 'react'
-import { Flex, Header, Image, P, Span } from '../components/Elements/Elements'
+import { useDisplayContext } from '../../utils/context/DisplayProvider'
+import { Flex, Header, Image, P, Span } from '../../components/Elements/Elements'
+import Modal from '../../components/Modal/Modal'
+import LoginForm from '../../components/LoginForm/LoginForm'
+import SignUpForm from '../../components/SignUpForm/SignUpForm'
 import './Landing.css'
 
 export default function Landing() {
+    const { display } = useDisplayContext()
 
     return (
         <>
+            <Modal>
+                {display?.login && <LoginForm />}
+                {display?.signUpForm && <SignUpForm />}
+            </Modal>
 
             <Flex className='landing-container border-red'>
                 <Header className="App-header">
