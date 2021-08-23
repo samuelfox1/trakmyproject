@@ -1,13 +1,12 @@
-import React, { useContext } from 'react'
-import { UserContext } from '../../context/UserContext'
+import React from 'react'
+import { useUserContext } from '../../utils/context/UserProvider'
 import { A, Flex, H3, H5, Image } from '../Elements/Elements'
 import './UserInfo.css'
 
 export default function UserInfo() {
-    const { loggedInUser } = useContext(UserContext)
+    const { loggedInUser } = useUserContext()
     const { dateCreated, profilePic, username, email } = loggedInUser
 
-    // console.log(loggedInUser)
     return (
         <>
             <Flex className='user-info-container'>

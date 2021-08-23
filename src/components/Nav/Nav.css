@@ -1,40 +1,26 @@
 nav {
+    position: fixed;
+    top: 0; 
+
     height:6vh;
     width: 100vw;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    position: fixed;
-    top: 0; 
+    z-index: 2;
     
     color: white;
     background-color: rgb(0, 0, 0);
-    z-index: 1;
 }
 
-.nav-login-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-wrap: wrap;
-}
 
-/* .nav-login-item {
-    max-width: 5rem;
-    margin-right: 1rem ;
-} */
 :-webkit-any-link.signup {
     font-size: .6rem;
     color:white;
     text-decoration: none;
     text-align: center;
 }
-
-/* .nav-input-container {
-
-} */
 
 .nav-brand-container {
     justify-content: center;
@@ -58,12 +44,6 @@ nav {
     margin: 0 1rem
 }
 
-.login-error-message {
-    margin: 0 1rem 0 0;
-    color:rgb(179, 49, 49)
-}
-
-
 a:-webkit-any-link.nav-brand-link {
     margin:0 1rem;
     color: rgb(255, 255, 255);
@@ -76,15 +56,5 @@ a:-webkit-any-link.nav-brand-link {
 
     nav {
         height:11vh
-    }
-
-    .nav-input-container{
-        margin-right: 1rem;
-        flex-direction: column;  
-        justify-content: space-around;      
-    }
-
-    .nav-login-item.button {
-        margin-bottom: 1rem;
     }
 }

@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { checkAvailableEmail, checkAvailableUsername, createUser } from '../../utils/userAPI'
-import { UserContext } from '../../context/UserContext'
+import { useUserContext } from '../../utils/context/UserProvider'
 import { Form, Label, Password, Submit, Text } from '../Elements/FormElements'
-import './SignUpForm.css'
 import { Flex, H2 } from '../Elements/Elements'
+import './SignUpForm.css'
 
 
-export const SignUpForm = () => {
-    const { setLoggedInUser } = useContext(UserContext)
+export default function SignUpForm() {
+
+    const { setLoggedInUser } = useUserContext()
 
     const componentName = 'signUpForm'
     const inputClassName = "input-signup border-radius"
@@ -43,7 +44,10 @@ export const SignUpForm = () => {
         return () => localStorage.removeItem(componentName)
     }, [])
 
-    const handleInputChange = (e) => setSignUpInputs({ ...signUpInputs, [e.target.name]: e.target.value })
+    const handleInputChange = (e) => {
+        const { name, value } = e.target
+        setSignUpInputs({ ...signUpInputs, [name]: value })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -64,6 +68,7 @@ export const SignUpForm = () => {
 
         checkAvailableUsername(username)
             .then(response => {
+                console.log(response)
                 if (!localStorage.getItem(componentName)) return
                 response
                     ? setUsernameClassName('valid')
@@ -157,6 +162,7 @@ export const SignUpForm = () => {
                     <Password htmlName={htmlNameConfirmPassword} value={confirmPassword.trim()} handleInputChange={handleInputChange} />
                 </Flex>
 
+                <Submit handleSubmit={handleSubmit}>Submit</Submit>
                 {allowSubmit
                     ? <Flex className='input-signup-submit border-radius'>
                         <Submit handleSubmit={handleSubmit}>Submit</Submit>
