@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { loginUser } from '../../utils/userAPI'
-import { Flex, H6 } from '../Elements/Elements'
+import { H6 } from '../Elements/Elements'
 import { Form, Label, Password, Submit, Text } from '../Elements/FormElements'
 import './LoginForm.css'
 
