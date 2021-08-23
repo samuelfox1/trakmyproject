@@ -20,10 +20,10 @@ export default function Nav() {
     }
 
     const handleLoginClick = () => {
-        setDisplay({ ...display, modal: true, login: true, signUp: false })
+        setDisplay({ ...display, modal: true, loginForm: true, signUpForm: false })
     }
     const handleSignUpClick = () => {
-        setDisplay({ ...display, modal: true, signUp: true, login: false })
+        setDisplay({ ...display, modal: true, signUpForm: true, loginForm: false })
     }
 
     return (
