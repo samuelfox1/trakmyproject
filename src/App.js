@@ -40,7 +40,7 @@ function App() {
       .then(({ data, status }) => loadUserData(data, status))
       .catch(error => console.log(error))
 
-  }, [token, loadUserData, getLoadingStatus, setLoadingStatus])
+  }, [token, loadUserData, getLoadingStatus, setLoadingStatus, isLoggedIn])
 
   useEffect(() => {
     isTokenExpired()
