@@ -9,10 +9,9 @@ import './LoginForm.css'
 
 export default function LoginForm() {
 
-    const [loginInputs, setLoginInputs] = useState({ username: 'sam0', password: 'password' })
-    const { username, password } = loginInputs
+    const [inputs, setInputs] = useState({ username: 'sam0', password: 'password' })
     const { setUser } = useUserContext()
-    const { getLoadingStatus, setLoadingStatus } = useDisplayContext()
+    const { setDisplay, getLoadingStatus, setLoadingStatus } = useDisplayContext()
     const [loginErrorMessage, setLoginErrorMessage] = useState('')
     const history = useHistory()
 
@@ -22,55 +21,50 @@ export default function LoginForm() {
 
     const handleInputClick = (e) => {
         const { name } = e.target
-        if (name === username) setLoginInputs({ ...loginInputs, username: '' })
-        if (name === password) setLoginInputs({ ...loginInputs, password: '' })
+        if (inputs.username === name) setInputs({ ...inputs, username: '' })
+        if (inputs.password === name) setInputs({ ...inputs, password: '' })
     }
     const onChange = (e) => {
         const { name, value } = e.target
-        setLoginInputs({ ...loginInputs, [name]: value })
+        setInputs({ ...inputs, [name]: value })
     }
 
     const handleLogin = (e => {
         e.preventDefault()
         if (getLoadingStatus()) return
         setLoadingStatus(true)
-        loginUser(loginInputs)
+        loginUser(inputs)
             .then(({ data }) => {
                 const { user, token } = data
                 localStorage.setItem('tmpToken', token)
                 setUser({ ...user, loggedIn: true, projects: user.projects })
+                setDisplay({ modal: false, componentName: '' })
                 history.push(`/user/${user.username}`)
             })
             .catch(err => console.log(err))
     })
 
-
-    const htmlNameUsername = 'username'
-    const htmlNamePassword = 'password'
-
     return (
         <Form id='login-form' className=''>
             <H1 className='reset'>Login</H1>
             <H6 className='login-error-message'>{loginErrorMessage}</H6>
-            <Label htmlFor={htmlNameUsername} text={htmlNameUsername}></Label>
+            <Label htmlFor='username' text='username'></Label>
             <Text
                 className=''
-                htmlName={htmlNameUsername}
-                value={username}
+                htmlName='username'
+                value={inputs.username}
                 onClick={handleInputClick}
                 onChange={onChange}
             />
-            <Label htmlFor={htmlNamePassword} text={htmlNamePassword}></Label>
+            <Label htmlFor='password' text='password'></Label>
             <Password
                 className=''
-                htmlName={htmlNamePassword}
-                value={password}
+                htmlName='password'
+                value={inputs.password}
                 onClick={handleInputClick}
                 onChange={onChange}
             />
             <Submit className=' button' onClick={(e) => handleLogin(e)}>Login</Submit>
-
-
         </Form>
     )
 }
