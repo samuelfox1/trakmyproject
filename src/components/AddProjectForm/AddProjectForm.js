@@ -42,19 +42,19 @@ export default function AddProjectForm() {
                     <H3>Add a project</H3>
                     <Flex className={inputClassName}>
                         <Label htmlFor='title' text='Title:' />
-                        <Text htmlName='title' value={title} handleInputChange={handleInputChange} />
+                        <Text htmlName='title' value={title} onChange={handleInputChange} />
                     </Flex>
                     <Flex className={inputClassName}>
                         <Label htmlFor='gitHubRepo' text='GitHubRepo:' />
-                        <Text htmlName='gitHubRepo' value={gitHubRepo} handleInputChange={handleInputChange} />
+                        <Text htmlName='gitHubRepo' value={gitHubRepo} onChange={handleInputChange} />
                     </Flex>
                     <Flex className={inputClassName}>
                         <Label htmlFor='description' text='Description:' />
-                        <TextArea htmlName='description' value={description} handleInputChange={handleInputChange} />
+                        <TextArea htmlName='description' value={description} onChange={handleInputChange} />
                     </Flex>
                     <Flex className={inputClassName}>
                         <Label htmlFor='makePrivate' text='Make Private:' />
-                        <Checkbox htmlName='makePrivate' checked={makePrivate} handleInputChange={handleInputChange} />
+                        <Checkbox htmlName='makePrivate' checked={makePrivate} onChange={handleInputChange} />
                     </Flex>
                     {allowSubmit
                         ? <Flex className='input-add-project-submit border-radius'>
