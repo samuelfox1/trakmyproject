@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
+import { useUserContext } from '../../utils/context/UserProvider'
+import { addProjectToUser } from '../../utils/projectsAPI'
 import { Flex, H3 } from '../Elements/Elements'
 import { Form, Label, Text, TextArea, Checkbox, Submit } from '../Elements/FormElements'
 import './AddProjectForm.css'
 
 export default function AddProjectForm() {
-
+    const { user, setUser } = useUserContext()
     const [allowSubmit, setAllowSubmit] = useState(true)
     const [inputs, setInputs] = useState({
+        admin_id: user._id,
         title: 'title',
         gitHubRepo: 'repo',
         description: 'description',
-        makePrivate: false
+        private: false
     })
     const inputClassName = "input-add-project border-radius"
 
@@ -25,9 +28,14 @@ export default function AddProjectForm() {
     }
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         validateFormData()
+        addProjectToUser(inputs)
+            .then(response => {
+                if (response.status !== 200) throw response
+                setUser({ ...user, projects: [inputs, ...user.projects] })
+            })
 
         // userProjects.push(inputs)
         // toggleDisplayForm()
@@ -50,11 +58,11 @@ export default function AddProjectForm() {
                     <TextArea htmlName='description' value={inputs.description} onChange={handleInputChange} />
                 </Flex>
                 <Flex className={inputClassName}>
-                    <Label htmlFor='makePrivate' text='Make Private:' />
-                    <Checkbox htmlName='makePrivate' checked={inputs.makePrivate} onChange={handleInputChange} />
+                    <Label htmlFor='private' text='Make Private:' />
+                    <Checkbox htmlName='private' checked={inputs.private} onChange={handleInputChange} />
                 </Flex>
 
-                {allowSubmit && <Submit handleSubmit={handleSubmit}>Submit</Submit>}
+                {allowSubmit && <Submit onClick={handleSubmit}>Submit</Submit>}
             </Form>
         </>
     )
