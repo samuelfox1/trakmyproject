@@ -9,6 +9,7 @@ const DisplayProvider = (props) => {
         modal: false,
         loginForm: false,
         signUpForm: false,
+        addProjectForm: false,
         pageNotFound: true,
     });
 
