@@ -14,7 +14,6 @@ import './App.css';
 
 function App() {
   const { user, setUser } = useUserContext()
-  const { isLoggedIn, username } = user
   const { getLoadingStatus, setLoadingStatus } = useDisplayContext()
   const token = localStorage.getItem('tmpToken')
   const history = useHistory()
@@ -22,25 +21,24 @@ function App() {
   const loadUserData = useCallback((data, status) => {
     if (status !== 200) return setLoadingStatus(false)
     const { user, token } = data
-    const { username, projects } = user
 
     localStorage.setItem('tmpToken', token)
-    setUser({ ...user, isLoggedIn: true, projects: projects })
+    setUser({ ...user, isLoggedIn: true, projects: user.projects })
     setLoadingStatus(false)
     console.log(user)
-    history?.push(`/user/${username}`)
+    history?.push(`/user/${user.username}`)
 
   }, [history, setUser, setLoadingStatus])
 
   const isTokenExpired = useCallback(() => {
-    if (isLoggedIn || !token || getLoadingStatus()) return
+    if (!token || getLoadingStatus()) return
 
     setLoadingStatus(true)
     checkToken(token)
       .then(({ data, status }) => loadUserData(data, status))
       .catch(error => console.log(error))
 
-  }, [token, loadUserData, getLoadingStatus, setLoadingStatus, isLoggedIn])
+  }, [token, loadUserData, getLoadingStatus, setLoadingStatus, user.isLoggedIn])
 
   useEffect(() => {
     isTokenExpired()
@@ -49,7 +47,7 @@ function App() {
 
   return (
     <Router>
-      {isLoggedIn && <Redirect to={`/user/${username}`} />}
+      {user.isLoggedIn && <Redirect to={`/user/${user.username}`} />}
       <Nav />
       <Flex id='App' className='App'>
 
