@@ -41,7 +41,7 @@ export const Password = ({ className, htmlName, value, onClick, onChange }) => (
         type="password"
         name={htmlName}
         value={value}
-        onClick={e => onClick(e)}
+        onClick={onClick ? (e) => onClick(e) : null}
         onChange={e => onChange(e)}
     />
 )
@@ -51,7 +51,7 @@ export const Checkbox = ({ className, htmlName, value, onClick, onChange }) => (
         type="checkbox"
         name={htmlName}
         value={value}
-        onClick={e => onClick(e)}
+        onClick={onClick ? (e) => onClick(e) : null}
         onChange={e => onChange(e)}
     />
 )
@@ -60,6 +60,6 @@ export const Submit = ({ className, onClick, children }) => (
     <button
         type='Submit'
         className={className}
-        onClick={e => onClick(e)}
+        onClick={onClick ? (e) => onClick(e) : null}
     >{children}</button>
 )
