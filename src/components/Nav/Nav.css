@@ -40,8 +40,8 @@ nav {
     justify-content: space-around;
 }
 
-.nav-button {
-    margin: 0 1rem
+.nav-login-item {
+    margin: 0 1vw
 }
 
 a:-webkit-any-link.nav-brand-link {

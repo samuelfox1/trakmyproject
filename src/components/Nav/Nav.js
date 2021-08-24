@@ -8,40 +8,38 @@ import './Nav.css'
 
 export default function Nav() {
 
-    const { loggedInUser, setLoggedInUser } = useUserContext()
-    const { loggedIn } = loggedInUser
-    const { display, setDisplay } = useDisplayContext()
+    const { user, setUser } = useUserContext()
+    const { isLoggedIn } = user
+    const { setDisplay } = useDisplayContext()
     const history = useHistory()
 
     const handleLogout = () => {
         localStorage.removeItem('tmpToken')
-        setLoggedInUser({ isLoggedIn: false })
+        setUser({ isLoggedIn: false })
         history.push('/')
     }
 
-    const handleLoginClick = () => {
-        setDisplay({ ...display, modal: true, login: true, signUp: false })
+    const handleDisplayModal = (componentName) => {
+        setDisplay({ modal: true, componentName: componentName })
     }
-    const handleSignUpClick = () => {
-        setDisplay({ ...display, modal: true, signUp: true, login: false })
-    }
+
 
     return (
         <nav>
             <Flex className='nav-brand-container'>
                 <Link className='nav-brand-link' to='/'>TrakMyProject</Link>
-                {loggedIn &&
+                {isLoggedIn &&
                     <>
                         <P>|</P>
-                        <Link className='nav-brand-link' to={`/user/${loggedInUser.username}`}> {loggedInUser.username}</Link>
+                        <Link className='nav-brand-link' to={`/user/${user.username}`}> {user.username}</Link>
                     </>
                 }
             </Flex>
-            {loggedIn
-                ? <Button className='nav-button' onClick={handleLogout}>logout</Button>
+            {isLoggedIn
+                ? <Button className='nav-login-item' onClick={handleLogout}>logout</Button>
                 : <div>
-                    <Button className='nav-button' onClick={handleLoginClick}>login</Button>
-                    <Button className='nav-button' onClick={handleSignUpClick} >sign up</Button>
+                    <Button className='nav-login-item' onClick={() => handleDisplayModal('LoginForm')}>login</Button>
+                    <Button className='nav-login-item' onClick={() => handleDisplayModal('SignUpForm')} >sign-up</Button>
                 </div>
             }
         </nav>

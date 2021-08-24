@@ -30,8 +30,10 @@
 /* Modal Content/Box */
 .modal-content {
     position: absolute;
+    min-width: 30vw;
     max-height:70vh;
-    margin: 150px auto;
+    margin: 100px auto;
+    margin-bottom: 100px;
     padding: 0 5% 5% 5%;
     z-index:2;
     background-color: rgba(0, 0, 0, 0.918); /* Black w/ opacity */

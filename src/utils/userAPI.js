@@ -9,7 +9,7 @@ export const checkAvailableEmail = (email) => {
 
     return (
         axios.post(URL, payload)
-            .then(data => data.data)
+            .then(({ data }) => data)
             .catch(err => err)
     )
 }
@@ -39,7 +39,7 @@ export const createUser = (user) => {
 
     return (
         axios.post(URL, payload)
-            .then(data => data)
+            .then(({ data }) => data)
             .catch(err => err)
     )
 }
@@ -66,6 +66,6 @@ export const checkToken = token => {
     )
 }
 
-export const logoutUser = () => {
+// export const logoutUser = () => {
 
-}
+// }
