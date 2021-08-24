@@ -57,11 +57,9 @@ export const Checkbox = ({ className, htmlName, value, handleInputChange, handle
 )
 
 export const Submit = ({ className, onClick, children }) => (
-    <input
+    <button
         type='Submit'
         className={className}
-        value={children}
-        onChange={() => console.log('submit')}
         onClick={e => onClick(e)}
-    />
+    >{children}</button>
 )
