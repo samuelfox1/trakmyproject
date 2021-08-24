@@ -8,17 +8,16 @@ import './Modal.css'
 export default function Modal({ className }) {
     const { display, setDisplay } = useDisplayContext()
     const [modalContent, setModalContent] = useState()
-
-    const modalOptions = {
-        LoginForm: () => setModalContent(<LoginForm />),
-        SignUpForm: () => setModalContent(<SignUpForm />),
-        AddProjectForm: () => setModalContent(<AddProjectForm />)
-    }
+    const [modalOptions] = useState({
+        LoginForm: <LoginForm />,
+        SignUpForm: <SignUpForm />,
+        AddProjectForm: <AddProjectForm />
+    })
 
     useEffect(() => {
         if (!display.modal) return setModalContent()
-        modalOptions[display.componentName]()
-    }, [display])
+        setModalContent(modalOptions[display.componentName])
+    }, [display, modalOptions])
 
     const closeModal = () => {
         setDisplay({ ...display, modal: false, componentName: '' })
