@@ -7,10 +7,7 @@ export const useDisplayContext = () => useContext(DisplayContext)
 const DisplayProvider = (props) => {
     const [display, setDisplay] = useState({
         modal: false,
-        loginForm: false,
-        signUpForm: false,
-        addProjectForm: false,
-        pageNotFound: true,
+        componentName: ''
     });
 
     const setLoadingStatus = (loadingKey, boolean) => {

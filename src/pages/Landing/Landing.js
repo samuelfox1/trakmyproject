@@ -1,30 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { useDisplayContext } from '../../utils/context/DisplayProvider'
+import React from 'react'
 import { Flex, Header, Image, P, Span } from '../../components/Elements/Elements'
 import Modal from '../../components/Modal/Modal'
-import LoginForm from '../../components/LoginForm/LoginForm'
-import SignUpForm from '../../components/SignUpForm/SignUpForm'
 import './Landing.css'
 
 export default function Landing() {
-    const [modal, setModal] = useState()
-
-    const { display } = useDisplayContext()
-
-    const displayLoginForm = () => setModal(<Modal><LoginForm /></Modal>)
-    const displaySignUpForm = () => setModal(<Modal><SignUpForm /></Modal>)
-
-    useEffect(() => {
-        if (display?.loginForm) return displayLoginForm()
-        if (display?.signUpForm) return displaySignUpForm()
-        setModal(null)
-    }, [display?.loginForm, display?.signUpForm])
 
     return (
         <>
-
-            {display?.modal ? modal : null}
-
+            <Modal />
             <Flex className='landing-container border-red'>
                 <Header className="App-header">
                     <P>Keep up to date with<br />

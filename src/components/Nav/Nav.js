@@ -10,7 +10,7 @@ export default function Nav() {
 
     const { user, setUser } = useUserContext()
     const { isLoggedIn } = user
-    const { display, setDisplay } = useDisplayContext()
+    const { setDisplay } = useDisplayContext()
     const history = useHistory()
 
     const handleLogout = () => {
@@ -19,12 +19,10 @@ export default function Nav() {
         history.push('/')
     }
 
-    const handleLoginClick = () => {
-        setDisplay({ ...display, modal: true, loginForm: true, signUpForm: false })
+    const handleDisplayModal = (componentName) => {
+        setDisplay({ modal: true, componentName: componentName })
     }
-    const handleSignUpClick = () => {
-        setDisplay({ ...display, modal: true, signUpForm: true, loginForm: false })
-    }
+
 
     return (
         <nav>
@@ -40,8 +38,8 @@ export default function Nav() {
             {isLoggedIn
                 ? <Button className='nav-login-item' onClick={handleLogout}>logout</Button>
                 : <div>
-                    <Button className='nav-login-item' onClick={handleLoginClick}>login</Button>
-                    <Button className='nav-login-item' onClick={handleSignUpClick} >sign up</Button>
+                    <Button className='nav-login-item' onClick={() => handleDisplayModal('LoginForm')}>login</Button>
+                    <Button className='nav-login-item' onClick={() => handleDisplayModal('SignUpForm')} >sign-up</Button>
                 </div>
             }
         </nav>
