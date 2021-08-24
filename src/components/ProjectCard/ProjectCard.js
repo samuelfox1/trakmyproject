@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, H1, P } from '../../Elements/Elements'
+import { Flex, H1, P } from '../Elements/Elements'
 import './ProjectCard.css'
 
 export default function ProjectCard({ project }) {

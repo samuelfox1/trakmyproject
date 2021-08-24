@@ -5,13 +5,13 @@ export const UserContext = createContext()
 export const useUserContext = () => useContext(UserContext)
 
 const UserProvider = (props) => {
-    const [loggedInUser, setLoggedInUser] = useState({
-        loggedIn: false,
+    const [user, setUser] = useState({
+        isLoggedIn: false,
         username: 'username-string',
     });
 
     return (
-        <UserContext.Provider value={{ loggedInUser, setLoggedInUser }} {...props} />
+        <UserContext.Provider value={{ user, setUser }} {...props} />
     );
 };
 

@@ -1,24 +1,27 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Flex } from '../../components/Elements/Elements'
 import UserInfo from '../../components/UserInfo/UserInfo'
-import AddProjectForm from '../../components/UserProjects/AddProjectForm/AddProjectForm'
+import Modal from '../../components/Modal/Modal'
 import UserProjects from '../../components/UserProjects/UserProjects'
+import { useDisplayContext } from '../../utils/context/DisplayProvider'
 import './Home.css'
 
 export default function Home() {
-    const [displayForm, setDisplayForm] = useState(false)
 
-    const toggleDisplayForm = () => setDisplayForm(!displayForm)
-    // const toggleDisplayForm = () => console.log('clicked')
+    const { setDisplay } = useDisplayContext()
+
+    const handleDisplayModal = (componentName) => {
+        setDisplay({ modal: true, componentName: componentName })
+    }
 
     return (
         <>
             <UserInfo />
             <br />
-            <Button onClick={toggleDisplayForm}>Add a project</Button>
+            <Button onClick={() => handleDisplayModal('AddProjectForm')}>Add a project</Button>
 
             <Flex className='projects-container'>
-                {displayForm ? <AddProjectForm toggleDisplayForm={toggleDisplayForm} /> : null}
+                <Modal />
                 <UserProjects />
             </Flex>
         </>
