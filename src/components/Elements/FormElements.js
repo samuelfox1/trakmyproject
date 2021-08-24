@@ -3,56 +3,56 @@ export const Form = ({ id, className, children }) => (
 )
 
 export const Label = ({ labelClassName, htmlFor, text }) => <label className={labelClassName} htmlFor={htmlFor} >{text}</label>
-export const Text = ({ className, htmlName, value, handleInputChange, handleInputClick }) => (
+export const Text = ({ className, htmlName, value, onChange, onClick }) => (
     <input
         className={className}
         type='text'
         name={htmlName}
         value={value}
-        onClick={handleInputClick ? (e) => handleInputClick(e) : null}
-        onChange={e => handleInputChange(e)}
+        onClick={onClick ? (e) => onClick(e) : null}
+        onChange={e => onChange(e)}
     />
 )
-export const TextArea = ({ className, htmlName, value, handleInputChange, handleInputClick, children }) => (
+export const TextArea = ({ className, htmlName, value, onChange, onClick, children }) => (
     <textarea
         className={className}
         type='text'
         name={htmlName}
         value={value}
-        onClick={handleInputClick ? (e) => handleInputClick(e) : null}
-        onChange={e => handleInputChange(e)}
+        onClick={onClick ? (e) => onClick(e) : null}
+        onChange={e => onChange(e)}
     >{children}</textarea>
 )
 
-export const Email = ({ className, htmlName, value, handleInputChange, handleInputClick }) => (
+export const Email = ({ className, htmlName, value, onChange, onClick }) => (
     <input
         className={className}
         type='email'
         name={htmlName}
         value={value}
-        onClick={handleInputClick ? (e) => handleInputClick(e) : null}
-        onChange={e => handleInputChange(e)}
+        onClick={onClick ? (e) => onClick(e) : null}
+        onChange={e => onChange(e)}
     />
 )
 
-export const Password = ({ className, htmlName, value, handleInputChange, handleInputClick }) => (
+export const Password = ({ className, htmlName, value, onClick, onChange }) => (
     <input
         className={className}
         type="password"
         name={htmlName}
         value={value}
-        onClick={handleInputClick ? (e) => handleInputClick(e) : null}
-        onChange={e => handleInputChange(e)}
+        onClick={e => onClick(e)}
+        onChange={e => onChange(e)}
     />
 )
-export const Checkbox = ({ className, htmlName, value, handleInputChange, handleInputClick }) => (
+export const Checkbox = ({ className, htmlName, value, onClick, onChange }) => (
     <input
         className={className}
         type="checkbox"
         name={htmlName}
         value={value}
-        onClick={handleInputClick ? (e) => handleInputClick(e) : null}
-        onChange={e => handleInputChange(e)}
+        onClick={e => onClick(e)}
+        onChange={e => onChange(e)}
     />
 )
 
