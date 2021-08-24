@@ -4,8 +4,8 @@ import { A, Flex, H3, H5, Image } from '../Elements/Elements'
 import './UserInfo.css'
 
 export default function UserInfo() {
-    const { loggedInUser } = useUserContext()
-    const { dateCreated, profilePic, username, email } = loggedInUser
+    const { user } = useUserContext()
+    const { dateCreated, profilePic, username, email } = user
 
     return (
         <>

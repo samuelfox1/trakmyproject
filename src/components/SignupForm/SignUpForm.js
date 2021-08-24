@@ -5,12 +5,12 @@ import { useUserContext } from '../../utils/context/UserProvider'
 import { Form, Label, Password, Text } from '../Elements/FormElements'
 import { Button, Flex, H2 } from '../Elements/Elements'
 import './SignUpForm.css'
-import { DisplayContext, useDisplayContext } from '../../utils/context/DisplayProvider'
+import { useDisplayContext } from '../../utils/context/DisplayProvider'
 
 
 export default function SignUpForm() {
 
-    const { setLoggedInUser } = useUserContext()
+    const { setUser } = useUserContext()
     const { display, setDisplay } = useDisplayContext()
 
     const componentName = 'signUpForm'
@@ -60,7 +60,7 @@ export default function SignUpForm() {
                 const { user, token } = data
                 if (!localStorage.getItem(componentName)) return
                 if (!user) console.log('failed to create new user')
-                setLoggedInUser({ ...user, loggedIn: true })
+                setUser({ ...user, loggedIn: true })
                 localStorage.setItem('tmpToken', token)
                 setDisplay({ ...display, modal: false, signUpForm: false })
                 history.push(`/user/${user.username}`)
@@ -144,27 +144,27 @@ export default function SignUpForm() {
             <H2>sign up</H2>
             <Flex className={inputClassName}>
                 <Label htmlFor={htmlNameFirstName} text='First Name:' />
-                <Text htmlName={htmlNameFirstName} value={firstName} handleInputChange={handleInputChange} />
+                <Text htmlName={htmlNameFirstName} value={firstName} onChange={handleInputChange} />
             </Flex>
             <Flex className={inputClassName}>
                 <Label htmlFor={htmlNameLastName} text='Last Name:' />
-                <Text htmlName={htmlNameLastName} value={lastName} handleInputChange={handleInputChange} />
+                <Text htmlName={htmlNameLastName} value={lastName} onChange={handleInputChange} />
             </Flex>
             <Flex className={`${inputClassName} ${emailClassName}`}>
                 <Label htmlFor={htmlNameEmail} text='Email:' />
-                <Text htmlName={htmlNameEmail} value={email.trim()} handleInputChange={handleInputChange} />
+                <Text htmlName={htmlNameEmail} value={email.trim()} onChange={handleInputChange} />
             </Flex>
             <Flex className={`${inputClassName} ${usernameClassName}`}>
                 <Label htmlFor={htmlNameUsername} text='Username:' />
-                <Text htmlName={htmlNameUsername} value={username} handleInputChange={handleInputChange} />
+                <Text htmlName={htmlNameUsername} value={username} onChange={handleInputChange} />
             </Flex>
             <Flex className={`${inputClassName} ${passwordClassName}`}>
                 <Label htmlFor={htmlNamePassword} text='Password:' />
-                <Password htmlName={htmlNamePassword} value={password.trim()} handleInputChange={handleInputChange} />
+                <Password htmlName={htmlNamePassword} value={password.trim()} onChange={handleInputChange} />
             </Flex>
             <Flex className={`${inputClassName} ${confirmPasswordClassName}`}>
                 <Label htmlFor={htmlNameConfirmPassword} text='Confrim PW:' />
-                <Password htmlName={htmlNameConfirmPassword} value={confirmPassword.trim()} handleInputChange={handleInputChange} />
+                <Password htmlName={htmlNameConfirmPassword} value={confirmPassword.trim()} onChange={handleInputChange} />
             </Flex>
 
             {allowSubmit

@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useDisplayContext } from '../../utils/context/DisplayProvider'
+import { useUserContext } from '../../utils/context/UserProvider'
 import { loginUser } from '../../utils/userAPI'
 import { H1, H6 } from '../Elements/Elements'
 import { Form, Label, Password, Submit, Text } from '../Elements/FormElements'
 import './LoginForm.css'
 
-export default function LoginForm({ getLoadingStatus, setLoadingStatus, loadUserData }) {
+export default function LoginForm() {
 
     const [loginInputs, setLoginInputs] = useState({ username: 'sam0', password: 'password' })
     const { username, password } = loginInputs
+    const { setUser } = useUserContext()
+    const { getLoadingStatus, setLoadingStatus } = useDisplayContext()
     const [loginErrorMessage, setLoginErrorMessage] = useState('')
+    const history = useHistory()
+
     useEffect(() => {
         setLoginErrorMessage('testing')
     }, [])
@@ -18,7 +25,7 @@ export default function LoginForm({ getLoadingStatus, setLoadingStatus, loadUser
         if (name === username) setLoginInputs({ ...loginInputs, username: '' })
         if (name === password) setLoginInputs({ ...loginInputs, password: '' })
     }
-    const handleInputChange = (e) => {
+    const onChange = (e) => {
         const { name, value } = e.target
         setLoginInputs({ ...loginInputs, [name]: value })
     }
@@ -28,7 +35,12 @@ export default function LoginForm({ getLoadingStatus, setLoadingStatus, loadUser
         if (getLoadingStatus()) return
         setLoadingStatus(true)
         loginUser(loginInputs)
-            .then(({ data, status }) => loadUserData(data, status))
+            .then(({ data }) => {
+                const { user, token } = data
+                localStorage.setItem('tmpToken', token)
+                setUser({ ...user, loggedIn: true, projects: user.projects })
+                history.push(`/user/${user.username}`)
+            })
             .catch(err => console.log(err))
     })
 
@@ -45,18 +57,18 @@ export default function LoginForm({ getLoadingStatus, setLoadingStatus, loadUser
                 className=''
                 htmlName={htmlNameUsername}
                 value={username}
-                handleInputClick={handleInputClick}
-                handleInputChange={handleInputChange}
+                onClick={handleInputClick}
+                onChange={onChange}
             />
             <Label htmlFor={htmlNamePassword} text={htmlNamePassword}></Label>
             <Password
                 className=''
                 htmlName={htmlNamePassword}
                 value={password}
-                handleInputClick={handleInputClick}
-                handleInputChange={handleInputChange}
+                onClick={handleInputClick}
+                onChange={onChange}
             />
-            <Submit className=' button' handleSubmit={(e) => handleLogin(e)}>Login</Submit>
+            <Submit className=' button' onClick={(e) => handleLogin(e)}>Login</Submit>
 
 
         </Form>

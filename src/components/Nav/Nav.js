@@ -8,14 +8,14 @@ import './Nav.css'
 
 export default function Nav() {
 
-    const { loggedInUser, setLoggedInUser } = useUserContext()
-    const { loggedIn } = loggedInUser
+    const { user, setUser } = useUserContext()
+    const { isLoggedIn } = user
     const { display, setDisplay } = useDisplayContext()
     const history = useHistory()
 
     const handleLogout = () => {
         localStorage.removeItem('tmpToken')
-        setLoggedInUser({ isLoggedIn: false })
+        setUser({ isLoggedIn: false })
         history.push('/')
     }
 
@@ -30,14 +30,14 @@ export default function Nav() {
         <nav>
             <Flex className='nav-brand-container'>
                 <Link className='nav-brand-link' to='/'>TrakMyProject</Link>
-                {loggedIn &&
+                {isLoggedIn &&
                     <>
                         <P>|</P>
-                        <Link className='nav-brand-link' to={`/user/${loggedInUser.username}`}> {loggedInUser.username}</Link>
+                        <Link className='nav-brand-link' to={`/user/${user.username}`}> {user.username}</Link>
                     </>
                 }
             </Flex>
-            {loggedIn
+            {isLoggedIn
                 ? <Button className='nav-login-item' onClick={handleLogout}>logout</Button>
                 : <div>
                     <Button className='nav-login-item' onClick={handleLoginClick}>login</Button>
