@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useUserContext } from '../../utils/context/UserProvider'
+import { useDisplayContext } from '../../context/DisplayProvider'
+import { useUserContext } from '../../context/UserProvider'
 import { addProjectToUser } from '../../utils/projectsAPI'
 import { Flex, H3 } from '../Elements/Elements'
 import { Form, Label, Text, TextArea, Checkbox, Submit } from '../Elements/FormElements'
@@ -7,7 +8,8 @@ import './AddProjectForm.css'
 
 export default function AddProjectForm() {
     const { user, setUser } = useUserContext()
-    const [allowSubmit, setAllowSubmit] = useState(true)
+    const { closeModal } = useDisplayContext()
+    const [allowSubmit, setAllowSubmit] = useState(false)
     const [inputs, setInputs] = useState({
         admin_id: user._id,
         title: 'title',
@@ -21,24 +23,23 @@ export default function AddProjectForm() {
     const handleInputChange = (e) => {
         const { name, value, checked } = e.target
         setInputs({ ...inputs, [name]: value || checked })
+        validateFormData()
     }
 
     const validateFormData = () => {
-        setAllowSubmit()
+        setAllowSubmit(true)
     }
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        validateFormData()
         addProjectToUser(inputs)
-            .then(response => {
-                if (response.status !== 200) throw response
-                setUser({ ...user, projects: [inputs, ...user.projects] })
+            .then(({ projects }) => {
+                console.log(projects)
+                setUser({ ...user, projects })
+                closeModal()
             })
 
-        // userProjects.push(inputs)
-        // toggleDisplayForm()
     }
 
     return (

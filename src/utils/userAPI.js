@@ -61,11 +61,7 @@ export const checkToken = token => {
 
     return (
         axios.get(URL, { headers: authorization })
-            .then(data => data)
+            .then(({ data }) => data)
             .catch(err => err)
     )
 }
-
-// export const logoutUser = () => {
-
-// }
