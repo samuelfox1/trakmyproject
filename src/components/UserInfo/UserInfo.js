@@ -1,5 +1,5 @@
 import React from 'react'
-import { useUserContext } from '../../utils/context/UserProvider'
+import { useUserContext } from '../../context/UserProvider'
 import { A, Flex, H3, H5, Image } from '../Elements/Elements'
 import './UserInfo.css'
 
