@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { useDisplayContext } from '../../utils/context/DisplayProvider'
-import { useUserContext } from '../../utils/context/UserProvider'
+import { useDisplayContext } from '../../context/DisplayProvider'
+import { useUserContext } from '../../context/UserProvider'
 import { Flex, Button, P } from '../Elements/Elements'
 import './Nav.css'
 
@@ -9,8 +9,7 @@ import './Nav.css'
 export default function Nav() {
 
     const { user, setUser } = useUserContext()
-    const { isLoggedIn } = user
-    const { setDisplay } = useDisplayContext()
+    const { displayModal } = useDisplayContext()
     const history = useHistory()
 
     const handleLogout = () => {
@@ -19,27 +18,22 @@ export default function Nav() {
         history.push('/')
     }
 
-    const handleDisplayModal = (componentName) => {
-        setDisplay({ modal: true, componentName: componentName })
-    }
-
-
     return (
         <nav>
             <Flex className='nav-brand-container'>
                 <Link className='nav-brand-link' to='/'>TrakMyProject</Link>
-                {isLoggedIn &&
+                {user?.isLoggedIn &&
                     <>
                         <P>|</P>
                         <Link className='nav-brand-link' to={`/user/${user.username}`}> {user.username}</Link>
                     </>
                 }
             </Flex>
-            {isLoggedIn
+            {user?.isLoggedIn
                 ? <Button className='nav-login-item' onClick={handleLogout}>logout</Button>
                 : <div>
-                    <Button className='nav-login-item' onClick={() => handleDisplayModal('LoginForm')}>login</Button>
-                    <Button className='nav-login-item' onClick={() => handleDisplayModal('SignUpForm')} >sign-up</Button>
+                    <Button className='nav-login-item' onClick={() => displayModal('LoginForm')}>login</Button>
+                    <Button className='nav-login-item' onClick={() => displayModal('SignUpForm')} >sign-up</Button>
                 </div>
             }
         </nav>
