@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { checkAvailableEmail, checkAvailableUsername, createUser } from '../../utils/userAPI'
-import { useUserContext } from '../../utils/context/UserProvider'
+import { useUserContext } from '../../context/UserProvider'
 import { Form, Label, Password, Text } from '../Elements/FormElements'
 import { Button, Flex, H2 } from '../Elements/Elements'
 import './SignUpForm.css'
-import { useDisplayContext } from '../../utils/context/DisplayProvider'
+import { useDisplayContext } from '../../context/DisplayProvider'
 
 
 export default function SignUpForm() {
 
     const { setUser } = useUserContext()
-    const { setDisplay } = useDisplayContext()
+    const { closeModal } = useDisplayContext()
     const [confirmPasswordClassName, setConfirmPasswordClassName] = useState('')
     const [usernameClassName, setUsernameClassName] = useState('')
     const [passwordClassName, setPasswordClassName] = useState('')
@@ -30,14 +30,8 @@ export default function SignUpForm() {
     })
     const history = useHistory()
 
-    const componentName = 'signUpForm'
     const inputClassName = "input-signup border-radius"
     const minPasswordLength = 8
-
-    useEffect(() => {
-        localStorage.setItem(componentName, 'ready')
-        return () => localStorage.removeItem(componentName)
-    }, [])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -48,15 +42,16 @@ export default function SignUpForm() {
         e.preventDefault()
         if (!allowSubmit) return
         createUser(inputs)
-            .then(({ data }) => {
-                const { user, token } = data
-                if (!localStorage.getItem(componentName)) return
+            .then(({ user, token }) => {
                 localStorage.setItem('tmpToken', token)
                 setUser({ ...user, loggedIn: true })
-                setDisplay({ modal: false, componentName: '' })
+                closeModal()
                 history.push(`/user/${user.username}`)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                closeModal()
+            })
     }
 
     // check available username
@@ -65,7 +60,6 @@ export default function SignUpForm() {
 
         checkAvailableUsername(inputs.username)
             .then(usernameExists => {
-                if (!localStorage.getItem(componentName)) return
                 if (usernameExists) {
                     setUsernameClassName('error')
                     setValidUsername(false)
@@ -86,7 +80,6 @@ export default function SignUpForm() {
             && emailArr.indexOf('.') !== -1) {
             checkAvailableEmail(inputs.email)
                 .then(emailExists => {
-                    if (!localStorage.getItem(componentName)) return
                     if (emailExists) {
                         setEmailClassName('error')
                         setValidEmail(false)
