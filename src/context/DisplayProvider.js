@@ -10,14 +10,17 @@ const DisplayProvider = (props) => {
         componentName: ''
     });
 
-    const setLoadingStatus = (loadingKey, boolean) => {
-        localStorage.setItem(loadingKey, boolean)
+    const displayModal = (componentName) => {
+        setDisplay({ ...display, modal: true, componentName })
     }
-    const getLoadingStatus = (loadingKey) => localStorage.getItem(loadingKey) === 'true' ? true : false
+
+    const closeModal = () => {
+        setDisplay({ ...display, modal: false, componentName: "" })
+    }
 
     return (
         <DisplayContext.Provider
-            value={{ display, setDisplay, getLoadingStatus, setLoadingStatus }}
+            value={{ display, setDisplay, displayModal, closeModal }}
             {...props}
         />
     );
