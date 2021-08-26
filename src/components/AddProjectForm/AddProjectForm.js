@@ -12,9 +12,9 @@ export default function AddProjectForm() {
     const [allowSubmit, setAllowSubmit] = useState(false)
     const [inputs, setInputs] = useState({
         admin_id: user._id,
-        title: 'title',
-        gitHubRepo: 'repo',
-        description: 'description',
+        title: '',
+        gitHubRepo: '',
+        description: '',
         private: false
     })
     const inputClassName = "input-add-project border-radius"
@@ -22,11 +22,15 @@ export default function AddProjectForm() {
 
     const handleInputChange = (e) => {
         const { name, value, checked } = e.target
-        setInputs({ ...inputs, [name]: value || checked })
+        setInputs({ ...inputs, [name]: name === 'private' ? checked : value })
         validateFormData()
     }
 
     const validateFormData = () => {
+        let key
+        for (key in inputs) {
+            if (key !== 'private' && !inputs[key]) return setAllowSubmit(false)
+        }
         setAllowSubmit(true)
     }
 
