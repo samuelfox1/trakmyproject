@@ -1,6 +1,8 @@
 import axios from 'axios'
+import { ApiURL } from './getApiUrl'
 
-const API_PREFIX = `${process.env.REACT_APP_API_PREFIX}/api/user`
+// const API_PREFIX = `${process.env.REACT_APP_API_PREFIX}/api/user`
+const API_PREFIX = `${ApiURL}/api/user`
 
 // check if a username is available when signing up or changing
 export const checkAvailableEmail = (email) => {
